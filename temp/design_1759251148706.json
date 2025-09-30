@@ -1,0 +1,39 @@
+{
+  "design_id": "henley_top_001",
+  "title": "Cute Fitted Henley Top with Lace Hemline",
+  "image_prompt": "Isolated flat-lay product render of a cute fitted Henley top, solid pastel blush pink color, minimal lace frills along hemline, dainty detailing, high-detail fabric texture, visible stitching and trims, plain white background, no model or mannequin.",
+  "color_palette": [
+    "pastel blush pink",
+    "soft ivory lace"
+  ],
+  "fabrics": [
+    "lightweight cotton jersey",
+    "delicate lace trim"
+  ],
+  "prints_patterns": [
+    "solid color"
+  ],
+  "garment_type": "Henley top",
+  "silhouette": "fitted",
+  "sleeves": "short sleeves",
+  "neckline": "Henley neckline with partial button placket",
+  "length": "hip length",
+  "style_fit": "cute and tailored fit",
+  "trims_and_details": [
+    "minimal lace frills at hemline",
+    "small mother-of-pearl buttons",
+    "fine topstitching"
+  ],
+  "techpack": {
+    "construction": "double-stitched seams, lace trim attached with narrow hem stitch",
+    "closure": "three-button Henley placket",
+    "fabric_weight": "160 gsm",
+    "care": "machine wash cold, line dry"
+  },
+  "provenance": {
+    "inspiration": "Modern romantic casual wear with subtle feminine details",
+    "designer": "In-house design team",
+    "season": "Spring/Summer 2024"
+  },
+  "design_text": "Cute Fitted Henley Top with Lace Hemline (henley_top_001)\nColors: pastel blush pink, soft ivory lace\nFabrics: lightweight cotton jersey, delicate lace trim\nPrints/Patterns: solid color\nGarment Type: Henley top\nSilhouette: fitted\nSleeves: short sleeves\nNeckline: Henley neckline with partial button placket\nLength: hip length\nStyle / Fit: c, u, t, e,  , a, n, d,  , t, a, i, l, o, r, e, d,  , f, i, t\nTrims & details: minimal lace frills at hemline, small mother-of-pearl buttons, fine topstitching\nTechpack: available"
+}

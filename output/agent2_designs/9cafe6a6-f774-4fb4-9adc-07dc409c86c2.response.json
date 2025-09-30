@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "[\n  {\n    \"design_id\": \"DRS-001\",\n    \"title\": \"Brown Silk Embroidered Draped Dress\",\n    \"image_prompt\": \"flat-lay product render of a brown silk draped flowing dress with full sleeves and crew neck, delicate tonal embroidery across bodice and hem, isolated on plain white background, high-detail fabric texture, visible stitching and trims\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"silk\"],\n    \"prints_patterns\": [\"embroidery\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"Draped/Flowing\",\n    \"sleeves\": \"Full sleeves\",\n    \"neckline\": \"Crew neck\",\n    \"length\": \"Midi\",\n    \"style_fit\": \"Relaxed fit\",\n    \"trims_and_details\": [\"tonal thread embroidery\", \"invisible side zipper\", \"narrow silk piping at neckline and cuffs\"],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"92cm\",\n        \"waist\": \"74cm\",\n        \"hip\": \"100cm\",\n        \"length\": \"115cm\",\n        \"sleeve_length\": \"60cm\"\n      },\n      \"construction\": {\n        \"stitch_type\": \"lockstitch\",\n        \"seam_type\": \"French seam\",\n        \"closure\": \"invisible side zipper\",\n        \"hem\": \"rolled hem\"\n      },\n      \"fabric_details\": {\n        \"material\": \"100% silk\",\n        \"weight\": \"80gsm\",\n        \"finish\": \"matte with slight sheen\"\n      },\n      \"embroidery_details\": {\n        \"thread\": \"rayon\",\n        \"pattern\": \"floral vine\",\n        \"placement\": \"bodice front and hemline\"\n      }\n    },\n    \"provenance\": {\n      \"designer\": \"In-house Design Team\",\n      \"season\": \"Spring/Summer 2024\",\n      \"inspiration\": \"Organic drape inspired by flowing river currents and artisanal embroidery traditions\"\n    }\n  }\n]",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759206310,
+  "id": "chatcmpl-CLMDG6S7kRIHqQe2ivPwac7JWVFal",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 429,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 349,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 778
+  }
+}

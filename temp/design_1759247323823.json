@@ -1,0 +1,57 @@
+{
+  "design_id": "DRS-2024-001",
+  "title": "Brown Draped Cotton Embroidered Dress",
+  "image_prompt": "flat-lay product render of a brown draped flowing cotton dress with full sleeves and V-neck, delicate tonal embroidery along neckline and sleeve cuffs, isolated on plain white background, high-detail fabric texture, visible stitching and trims",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "Draped/Flowing",
+  "sleeves": "Full sleeves",
+  "neckline": "V-neck",
+  "length": "midi",
+  "style_fit": "relaxed fit",
+  "trims_and_details": [
+    "tonal embroidery on neckline and cuffs",
+    "side slit hem",
+    "covered button closure at back"
+  ],
+  "techpack": {
+    "measurements": {
+      "bust": "94cm",
+      "waist": "78cm",
+      "hip": "102cm",
+      "length": "115cm",
+      "sleeve_length": "60cm"
+    },
+    "construction": {
+      "stitch_type": "lockstitch",
+      "seam_type": "French seam",
+      "hem_finish": "double fold hem"
+    },
+    "embroidery": {
+      "thread_color": "dark brown",
+      "placement": [
+        "neckline",
+        "cuff edges"
+      ],
+      "technique": "satin stitch"
+    },
+    "closures": {
+      "type": "covered button",
+      "placement": "center back"
+    }
+  },
+  "provenance": {
+    "designer": "In-house Studio",
+    "season": "Autumn/Winter 2024",
+    "inspiration": "Earthy tones and artisanal embroidery inspired by rustic countryside aesthetics"
+  },
+  "design_text": "Brown Draped Cotton Embroidered Dress (DRS-2024-001)\nColors: brown\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: Draped/Flowing\nSleeves: Full sleeves\nNeckline: V-neck\nLength: midi\nStyle / Fit: r, e, l, a, x, e, d,  , f, i, t\nTrims & details: tonal embroidery on neckline and cuffs, side slit hem, covered button closure at back\nTechpack: available"
+}

@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "[\n  {\n    \"design_id\": \"DRS-2024-001\",\n    \"title\": \"Brown Cotton Embroidered Draped Dress\",\n    \"image_prompt\": \"flat-lay product render of a brown cotton draped flowing dress with full sleeves and crew neck, delicate tonal embroidery across bodice and hem, high-detail fabric texture, visible stitching and trims, isolated on plain white background\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"cotton\"],\n    \"prints_patterns\": [\"embroidery\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"Draped/Flowing\",\n    \"sleeves\": \"Full sleeves\",\n    \"neckline\": \"Crew neck\",\n    \"length\": \"Midi\",\n    \"style_fit\": \"Relaxed fit\",\n    \"trims_and_details\": [\"tonal embroidery on bodice and hem\", \"side seam pockets\", \"invisible back zipper\"],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"36 in\",\n        \"waist\": \"30 in\",\n        \"hip\": \"40 in\",\n        \"length\": \"45 in\",\n        \"sleeve_length\": \"24 in\"\n      },\n      \"construction\": {\n        \"stitch_type\": \"lockstitch\",\n        \"seam_type\": \"French seam\",\n        \"hem_finish\": \"double-fold hem\"\n      },\n      \"fabric_weight\": \"180 gsm\",\n      \"care_instructions\": \"Machine wash cold, tumble dry low, warm iron if needed\"\n    },\n    \"provenance\": {\n      \"designer\": \"In-house Design Team\",\n      \"season\": \"Spring/Summer 2024\",\n      \"inspiration\": \"Earthy tones and artisanal embroidery inspired by rustic countryside aesthetics\"\n    }\n  }\n]",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759222400,
+  "id": "chatcmpl-CLQOmZO3WFhRtumDwWVJ0tO0PER3F",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 377,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 349,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 726
+  }
+}

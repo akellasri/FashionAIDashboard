@@ -1,0 +1,56 @@
+{
+  "design_id": "HTPNT001",
+  "title": "Cute Henley Top with Lace Hem & Flared Low-Waist Jeans",
+  "image_prompt": "Flat-lay product render of a cute fitting Henley top in solid pastel color with minimal lace frills along the hemline, dainty detailing, high-detail fabric texture, visible stitching and trims, paired with low-waisted flared jeans in dark blue denim, clean hemline, isolated on plain white background, no model, no mannequin, apparel-only composition.",
+  "color_palette": [
+    "pastel pink",
+    "dark blue denim"
+  ],
+  "fabrics": [
+    "cotton jersey",
+    "lace trim",
+    "denim"
+  ],
+  "prints_patterns": [
+    "solid"
+  ],
+  "garment_type": "Henley top and flared jeans set",
+  "silhouette": "fitted top with flared pants",
+  "sleeves": "long sleeves",
+  "neckline": "Henley neckline with button placket",
+  "length": "top: hip length, pants: full length",
+  "style_fit": "cute fitted top, elegant flared pants",
+  "trims_and_details": [
+    "minimal lace frill hemline",
+    "button placket",
+    "clean hemline on pants"
+  ],
+  "techpack": {
+    "top": {
+      "fabric": "cotton jersey with lace trim",
+      "construction": "double-stitched seams, lace hem attached with overlock stitch",
+      "closure": "3-button Henley placket",
+      "measurements": {
+        "length": "hip length",
+        "sleeve_length": "full",
+        "fit": "fitted"
+      }
+    },
+    "pants": {
+      "fabric": "12oz denim",
+      "construction": "flat-felled seams, clean hemline",
+      "waist": "low-rise",
+      "leg": "flared",
+      "measurements": {
+        "inseam": "32 inches",
+        "rise": "8 inches"
+      }
+    }
+  },
+  "provenance": {
+    "designer": "AI Fashion Assistant",
+    "date_created": "2024-07-01",
+    "inspiration": "Soft feminine details paired with classic denim flare for a balanced casual-chic look."
+  },
+  "design_text": "Cute Henley Top with Lace Hem & Flared Low-Waist Jeans (HTPNT001)\nColors: pastel pink, dark blue denim\nFabrics: cotton jersey, lace trim, denim\nPrints/Patterns: solid\nGarment Type: Henley top and flared jeans set\nSilhouette: fitted top with flared pants\nSleeves: long sleeves\nNeckline: Henley neckline with button placket\nLength: top: hip length, pants: full length\nStyle / Fit: c, u, t, e,  , f, i, t, t, e, d,  , t, o, p, ,,  , e, l, e, g, a, n, t,  , f, l, a, r, e, d,  , p, a, n, t, s\nTrims & details: minimal lace frill hemline, button placket, clean hemline on pants\nTechpack: available"
+}

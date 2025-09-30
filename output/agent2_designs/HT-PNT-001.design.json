@@ -1,0 +1,57 @@
+{
+  "design_id": "HT-PNT-001",
+  "title": "Cute Henley Top with Lace Hem & Flared Low-Waist Jeans",
+  "image_prompt": "Isolated flat-lay product render of a cute fitting Henley top with minimal lace frills along the hemline, dainty detailing, solid pastel color, paired with low-waisted flared jeans with clean hemline, dark blue denim or light washed denim depending on top color, high-detail fabric texture, visible stitching and trims, plain white background",
+  "color_palette": [
+    "pastel pink",
+    "ivory",
+    "dark blue denim",
+    "light washed denim"
+  ],
+  "fabrics": [
+    "cotton jersey",
+    "lace trim",
+    "denim"
+  ],
+  "prints_patterns": [
+    "solid"
+  ],
+  "garment_type": "Henley top and flared jeans set",
+  "silhouette": "fitted top with flared pants",
+  "sleeves": "long sleeves",
+  "neckline": "Henley neckline with button placket",
+  "length": "top: hip length, pants: full length",
+  "style_fit": "top: slim fit, pants: relaxed flare",
+  "trims_and_details": [
+    "minimal lace frill hemline",
+    "button placket",
+    "clean hemline on pants"
+  ],
+  "techpack": {
+    "top": {
+      "fabric": "cotton jersey with lace trim",
+      "construction": "double-stitched seams, lace hem attached with overlock stitch",
+      "closure": "3-button placket",
+      "measurements": {
+        "length": "hip length",
+        "sleeve_length": "full sleeve"
+      }
+    },
+    "pants": {
+      "fabric": "12oz denim",
+      "construction": "flat-felled seams, clean hemline",
+      "waist": "low rise",
+      "fit": "flared leg",
+      "measurements": {
+        "inseam": "32 inches",
+        "flare_width": "10 inches at hem"
+      }
+    }
+  },
+  "provenance": {
+    "inspiration": "Casual chic pairing of a feminine Henley top with lace accents and retro-inspired flared jeans",
+    "designer": "AI Fashion Assistant",
+    "date_created": "2024-07-01"
+  },
+  "design_text": "Cute Henley Top with Lace Hem & Flared Low-Waist Jeans (HT-PNT-001)\nColors: pastel pink, ivory, dark blue denim, light washed denim\nFabrics: cotton jersey, lace trim, denim\nPrints/Patterns: solid\nGarment Type: Henley top and flared jeans set\nSilhouette: fitted top with flared pants\nSleeves: long sleeves\nNeckline: Henley neckline with button placket\nLength: top: hip length, pants: full length\nStyle / Fit: t, o, p, :,  , s, l, i, m,  , f, i, t, ,,  , p, a, n, t, s, :,  , r, e, l, a, x, e, d,  , f, l, a, r, e\nTrims & details: minimal lace frill hemline, button placket, clean hemline on pants\nTechpack: available"
+}

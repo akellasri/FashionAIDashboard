@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "[\n  {\n    \"design_id\": \"MDX-001-V1\",\n    \"title\": \"Elegant Crimson Silk Crepe Maxi Dress\",\n    \"image_prompt\": \"flat-lay product render of an elegant crimson red silk crepe maxi dress, A-line silhouette, sleeveless, V-neck, floor-length, tailored waist with flowing skirt, subtle side slit, invisible back zipper, delicate topstitching, isolated on plain white background, high-detail fabric texture, visible stitching and trims\",\n    \"color_palette\": [\"crimson red\"],\n    \"fabrics\": [\"silk crepe\"],\n    \"prints_patterns\": [\"solid color\"],\n    \"garment_type\": \"maxi dress\",\n    \"silhouette\": \"A-line\",\n    \"sleeves\": \"sleeveless\",\n    \"neckline\": \"V-neck\",\n    \"length\": \"floor-length\",\n    \"style_fit\": \"tailored waist, flowing skirt\",\n    \"trims_and_details\": [\"subtle side slit\", \"invisible back zipper\", \"delicate topstitching\"],\n    \"techpack\": {\n      \"construction\": \"A-line cut with tailored waist, sleeveless armholes finished with bias binding, V-neckline with facing, invisible back zipper closure, side slit reinforced with clean finish hem\",\n      \"materials\": {\n        \"main_fabric\": \"100% silk crepe\",\n        \"thread\": \"polyester thread matching crimson red\",\n        \"zipper\": \"invisible nylon zipper in matching color\"\n      },\n      \"measurements\": {\n        \"length\": \"150 cm from shoulder to hem\",\n        \"waist\": \"fitted to size chart\",\n        \"slit_length\": \"40 cm from hem upward\"\n      },\n      \"finishing\": \"delicate topstitching along neckline and armholes, hem finished with narrow rolled hem\"\n    },\n    \"provenance\": {\n      \"designer\": \"In-house Design Team\",\n      \"season\": \"Spring/Summer 2024\",\n      \"collection\": \"Evening Elegance\",\n      \"sku\": \"MDX-001\"\n    }\n  }\n]",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759255143,
+  "id": "chatcmpl-CLYutVHg3E0FWlQ0aUYhicwT10Jnf",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 438,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 565,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 1003
+  }
+}

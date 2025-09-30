@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"MDX-001\",\n    \"title\": \"Elegant Maxi Dress in Black or Red\",\n    \"image_prompt\": \"Isolated flat-lay product render of an elegant maxi dress on a plain white background, high-detail fabric texture, visible stitching and trims, available in deep black and rich crimson red, featuring a flowing A-line silhouette, sleeveless design, V-neckline, floor-length hem, tailored waist, subtle side slit, made from lightweight silk crepe, no model or mannequin, apparel-only view\",\n    \"color_palette\": [\"deep black\", \"crimson red\"],\n    \"fabrics\": [\"silk crepe\"],\n    \"prints_patterns\": [\"solid color\"],\n    \"garment_type\": \"maxi dress\",\n    \"silhouette\": \"A-line\",\n    \"sleeves\": \"sleeveless\",\n    \"neckline\": \"V-neck\",\n    \"length\": \"floor-length\",\n    \"style_fit\": \"tailored waist with flowing skirt\",\n    \"trims_and_details\": [\"subtle side slit\", \"invisible back zipper\", \"delicate topstitching\"],\n    \"techpack\": {\n      \"front_view\": \"A-line sleeveless maxi dress with V-neckline, tailored waist, flowing skirt, side slit on left leg\",\n      \"back_view\": \"Clean back with invisible zipper closure, slight flare at hem\",\n      \"materials\": [\"100% silk crepe\"],\n      \"colors\": [\"deep black\", \"crimson red\"],\n      \"stitching\": \"matching thread color, fine topstitching along neckline and armholes\",\n      \"finishing\": \"rolled hem at skirt, bias-bound neckline\"\n    },\n    \"provenance\": \"AI-generated design based on user description for flattering silhouette and fabric choice\"\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759255078,
+  "id": "chatcmpl-CLYtqSoFHKyztLzBe2fICH8kJIqxW",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 380,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 391,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 771
+  }
+}

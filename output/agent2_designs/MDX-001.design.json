@@ -1,0 +1,41 @@
+{
+  "design_id": "MDX-001",
+  "title": "Elegant Maxi Dress in Black or Red",
+  "image_prompt": "Isolated flat-lay product render of an elegant maxi dress on a plain white background, high-detail fabric texture, visible stitching and trims, available in deep black and rich crimson red, featuring a flowing A-line silhouette, sleeveless design, V-neckline, floor-length hem, tailored waist, subtle side slit, made from lightweight silk crepe, no model or mannequin, apparel-only view",
+  "color_palette": [
+    "deep black",
+    "crimson red"
+  ],
+  "fabrics": [
+    "silk crepe"
+  ],
+  "prints_patterns": [
+    "solid color"
+  ],
+  "garment_type": "maxi dress",
+  "silhouette": "A-line",
+  "sleeves": "sleeveless",
+  "neckline": "V-neck",
+  "length": "floor-length",
+  "style_fit": "tailored waist with flowing skirt",
+  "trims_and_details": [
+    "subtle side slit",
+    "invisible back zipper",
+    "delicate topstitching"
+  ],
+  "techpack": {
+    "front_view": "A-line sleeveless maxi dress with V-neckline, tailored waist, flowing skirt, side slit on left leg",
+    "back_view": "Clean back with invisible zipper closure, slight flare at hem",
+    "materials": [
+      "100% silk crepe"
+    ],
+    "colors": [
+      "deep black",
+      "crimson red"
+    ],
+    "stitching": "matching thread color, fine topstitching along neckline and armholes",
+    "finishing": "rolled hem at skirt, bias-bound neckline"
+  },
+  "provenance": "AI-generated design based on user description for flattering silhouette and fabric choice",
+  "design_text": "Elegant Maxi Dress in Black or Red (MDX-001)\nColors: deep black, crimson red\nFabrics: silk crepe\nPrints/Patterns: solid color\nGarment Type: maxi dress\nSilhouette: A-line\nSleeves: sleeveless\nNeckline: V-neck\nLength: floor-length\nStyle / Fit: t, a, i, l, o, r, e, d,  , w, a, i, s, t,  , w, i, t, h,  , f, l, o, w, i, n, g,  , s, k, i, r, t\nTrims & details: subtle side slit, invisible back zipper, delicate topstitching\nTechpack: available"
+}

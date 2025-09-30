@@ -1,0 +1,21 @@
+{
+  "id": "38792d41-a1bc-4a27-a26d-80cfc67b7d52",
+  "user_content": {
+    "colors": [
+      "brown"
+    ],
+    "fabrics": [
+      "silk"
+    ],
+    "prints": [
+      "florals"
+    ],
+    "garment_type": "dress",
+    "silhouette": "A-line",
+    "sleeves": "short sleeve",
+    "neckline": "V-neck",
+    "trims_and_details": [],
+    "variants": 1
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

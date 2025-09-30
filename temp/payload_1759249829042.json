@@ -1,0 +1,15 @@
+{
+  "id": "2ba3dc2b-5c6a-4b8e-9b3c-6f6fe803ab80",
+  "user_content": {
+    "colors": [],
+    "fabrics": [],
+    "prints": [],
+    "garment_type": "",
+    "silhouette": "",
+    "sleeves": "",
+    "neckline": "",
+    "trims_and_details": [],
+    "variants": 1
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

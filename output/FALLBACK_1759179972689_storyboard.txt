@@ -1,0 +1,19 @@
+
+You are a fashion video director. Use the design summary below to:
+1) produce a short 6-second storyboard describing camera framing, timing and moves (3-5 bullets).
+2) then render a photorealistic 6-second runway video showing an Indian model wearing the design.
+
+Model attributes:
+- Gender: female
+- Age range: 25-32
+- Body type: slim
+- Skin tone: medium
+- Pose / action: walk
+
+Design summary:
+Title: AI Generated Design (fallback). Colors: brown, white. Fabrics: cotton. Garment: dress. Silhouette: A-line. Sleeves: Full sleeves. Neckline: Crew neck. Prints: solids. Notes: Standard construction
+
+Requirements for the video:
+- Shots: Full-length runway shots only (no close-ups). 3–4 distinct moves (walk, turn, pose).
+- Lighting: soft studio key + subtle rim, neutral background, no logos or text.
+- Output: photorealistic MP4, duration ~6s.

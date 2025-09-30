@@ -1,0 +1,17 @@
+{
+  "id": "490501f3-d36e-4d85-99de-8a3ec9b9aee9",
+  "user_content": {
+    "colors": [],
+    "fabrics": [],
+    "prints": [],
+    "garment_type": "",
+    "silhouette": "",
+    "sleeves": "",
+    "neckline": "",
+    "trims_and_details": [],
+    "variants": 1,
+    "description": "A cute fitting Henley top with minimal lace frills in hemline with dainty details or in a solid colour.",
+    "user_override_prompt": "A cute fitting Henley top with minimal lace frills in hemline with dainty details or in a solid colour."
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

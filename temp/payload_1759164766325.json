@@ -1,0 +1,23 @@
+{
+  "id": "6bbd48a4-a3c1-441b-abd8-ac6e9bf39848",
+  "user_content": {
+    "colors": [
+      "brown"
+    ],
+    "fabrics": [
+      "cotton"
+    ],
+    "prints": [
+      "embroidery"
+    ],
+    "garment_type": "dress",
+    "silhouette": "Draped/Flowing",
+    "sleeves": "short sleeve",
+    "neckline": "V-neck",
+    "trims_and_details": [
+      "lace hem"
+    ],
+    "variants": 1
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

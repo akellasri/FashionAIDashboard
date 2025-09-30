@@ -1,0 +1,21 @@
+{
+  "id": "544cb69d-5cf5-415d-b4e5-7b2a75dce2b7",
+  "user_content": {
+    "colors": [
+      "blue"
+    ],
+    "fabrics": [
+      "silk"
+    ],
+    "prints": [
+      "solids / minimalist"
+    ],
+    "garment_type": "dress",
+    "silhouette": "Draped/Flowing",
+    "sleeves": "short sleeve",
+    "neckline": "V-neck",
+    "trims_and_details": [],
+    "variants": 1
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

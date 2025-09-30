@@ -1,0 +1,46 @@
+{
+  "design_id": "MDX-001-V1",
+  "title": "Elegant Crimson Silk Crepe Maxi Dress",
+  "image_prompt": "flat-lay product render of an elegant crimson red silk crepe maxi dress, A-line silhouette, sleeveless, V-neck, floor-length, tailored waist with flowing skirt, subtle side slit, invisible back zipper, delicate topstitching, isolated on plain white background, high-detail fabric texture, visible stitching and trims",
+  "color_palette": [
+    "crimson red"
+  ],
+  "fabrics": [
+    "silk crepe"
+  ],
+  "prints_patterns": [
+    "solid color"
+  ],
+  "garment_type": "maxi dress",
+  "silhouette": "A-line",
+  "sleeves": "sleeveless",
+  "neckline": "V-neck",
+  "length": "floor-length",
+  "style_fit": "tailored waist, flowing skirt",
+  "trims_and_details": [
+    "subtle side slit",
+    "invisible back zipper",
+    "delicate topstitching"
+  ],
+  "techpack": {
+    "construction": "A-line cut with tailored waist, sleeveless armholes finished with bias binding, V-neckline with facing, invisible back zipper closure, side slit reinforced with clean finish hem",
+    "materials": {
+      "main_fabric": "100% silk crepe",
+      "thread": "polyester thread matching crimson red",
+      "zipper": "invisible nylon zipper in matching color"
+    },
+    "measurements": {
+      "length": "150 cm from shoulder to hem",
+      "waist": "fitted to size chart",
+      "slit_length": "40 cm from hem upward"
+    },
+    "finishing": "delicate topstitching along neckline and armholes, hem finished with narrow rolled hem"
+  },
+  "provenance": {
+    "designer": "In-house Design Team",
+    "season": "Spring/Summer 2024",
+    "collection": "Evening Elegance",
+    "sku": "MDX-001"
+  },
+  "design_text": "Elegant Crimson Silk Crepe Maxi Dress (MDX-001-V1)\nColors: crimson red\nFabrics: silk crepe\nPrints/Patterns: solid color\nGarment Type: maxi dress\nSilhouette: A-line\nSleeves: sleeveless\nNeckline: V-neck\nLength: floor-length\nStyle / Fit: t, a, i, l, o, r, e, d,  , w, a, i, s, t, ,,  , f, l, o, w, i, n, g,  , s, k, i, r, t\nTrims & details: subtle side slit, invisible back zipper, delicate topstitching\nTechpack: available"
+}

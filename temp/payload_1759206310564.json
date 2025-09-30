@@ -1,0 +1,21 @@
+{
+  "id": "9cafe6a6-f774-4fb4-9adc-07dc409c86c2",
+  "user_content": {
+    "colors": [
+      "brown"
+    ],
+    "fabrics": [
+      "silk"
+    ],
+    "prints": [
+      "embroidery"
+    ],
+    "garment_type": "dress",
+    "silhouette": "Draped/Flowing",
+    "sleeves": "Full sleeves",
+    "neckline": "Crew neck",
+    "trims_and_details": [],
+    "variants": 1
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

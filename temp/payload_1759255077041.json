@@ -1,0 +1,17 @@
+{
+  "id": "c813859a-8a23-4b13-930d-8d0de9befeb1",
+  "user_content": {
+    "colors": [],
+    "fabrics": [],
+    "prints": [],
+    "garment_type": "",
+    "silhouette": "",
+    "sleeves": "",
+    "neckline": "",
+    "trims_and_details": [],
+    "variants": 1,
+    "description": "Black or red maxi dress, I'd let AI pick the most flattering silhouette and fabric",
+    "user_override_prompt": "Black or red maxi dress, I'd let AI pick the most flattering silhouette and fabric"
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

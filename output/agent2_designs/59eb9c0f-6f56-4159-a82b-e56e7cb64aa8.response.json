@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"DRESS-A001\",\n    \"title\": \"Brown Cotton A-Line Dress with Embroidery\",\n    \"image_prompt\": \"Flat-lay product render of a brown cotton A-line dress, short sleeves, V-neck, delicate tonal embroidery along the hem and neckline, isolated on plain white background, high-detail fabric texture, visible stitching and trims, no model or mannequin.\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"cotton\"],\n    \"prints_patterns\": [\"embroidery\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"A-line\",\n    \"sleeves\": \"short sleeve\",\n    \"neckline\": \"V-neck\",\n    \"length\": \"knee-length\",\n    \"style_fit\": \"regular fit\",\n    \"trims_and_details\": [],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"36 in\",\n        \"waist\": \"30 in\",\n        \"hip\": \"38 in\",\n        \"length\": \"38 in\",\n        \"sleeve_length\": \"8 in\"\n      },\n      \"fabric_weight\": \"150 gsm\",\n      \"stitch_type\": \"lockstitch\",\n      \"embroidery_thread\": \"polyester, tonal brown\",\n      \"closure\": \"hidden side zipper\",\n      \"care_instructions\": \"machine wash cold, tumble dry low\"\n    },\n    \"provenance\": \"Designed in-house by the brand's studio, inspired by classic summer silhouettes.\"\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759186288,
+  "id": "chatcmpl-CLH0KfJqjJvBGjFXbSsArNZA3CQF4",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 321,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 292,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 613
+  }
+}

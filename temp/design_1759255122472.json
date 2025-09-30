@@ -1,0 +1,31 @@
+{
+  "design_id": "MDX-001",
+  "title": "Elegant Maxi Dress in Red",
+  "image_prompt": "Isolated flat-lay product render of an elegant maxi dress on a plain white background, high-detail fabric texture, visible stitching and trims, available in rich crimson red, featuring a flowing A-line silhouette, sleeveless design, V-neckline, floor-length hem, tailored waist, subtle side slit, made from lightweight silk crepe, no model or mannequin, apparel-only view",
+  "color_palette": [
+    "crimson red"
+  ],
+  "fabrics": [
+    "silk crepe"
+  ],
+  "prints_patterns": [
+    "solid color"
+  ],
+  "garment_type": "maxi dress",
+  "silhouette": "A-line",
+  "sleeves": "sleeveless",
+  "neckline": "V-neck",
+  "length": "floor-length",
+  "style_fit": [
+    "tailored waist",
+    "flowing skirt"
+  ],
+  "trims_and_details": [
+    "subtle side slit",
+    "invisible back zipper",
+    "delicate topstitching"
+  ],
+  "techpack": "Front view: A-line sleeveless maxi dress with V-neckline, tailored waist, flowing skirt, side slit on left leg. Back view: Clean back with invisible zipper closure, slight flare at hem. Materials: 100% silk crepe. Colors: crimson red. Stitching: matching thread color, fine topstitching along neckline and armholes. Finishing: rolled hem at skirt, bias-bound neckline.",
+  "provenance": "AI-generated design based on user description for flattering silhouette and fabric choice",
+  "design_text": "Elegant Maxi Dress in Red (MDX-001) Colors: crimson red Fabrics: silk crepe Prints: solid color Garment: maxi dress Silhouette: A-line Sleeves: sleeveless Neckline: V-neck Length: floor-length Style/Fit: tailored waist, flowing skirt Trims: subtle side slit, invisible back zipper, delicate topstitching"
+}

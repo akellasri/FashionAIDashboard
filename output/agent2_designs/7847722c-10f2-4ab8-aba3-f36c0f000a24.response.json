@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"henley_top_001\",\n    \"title\": \"Cute Fitted Henley Top with Lace Hemline\",\n    \"image_prompt\": \"Flat-lay product render of a cute fitted Henley top, solid pastel blush pink color, minimal lace frills along hemline, dainty detailing, high-detail fabric texture, visible stitching and trims, isolated on plain white background, no model, no mannequin, apparel-only view.\",\n    \"color_palette\": [\"pastel blush pink\", \"soft ivory lace\"],\n    \"fabrics\": [\"cotton jersey\", \"lace trim\"],\n    \"prints_patterns\": [\"solid\"],\n    \"garment_type\": \"Henley top\",\n    \"silhouette\": \"fitted\",\n    \"sleeves\": \"long sleeves\",\n    \"neckline\": \"Henley neckline with button placket\",\n    \"length\": \"hip length\",\n    \"style_fit\": \"cute fitted\",\n    \"trims_and_details\": [\"minimal lace frills at hemline\", \"small mother-of-pearl buttons\", \"dainty stitching details\"],\n    \"techpack\": {\n      \"construction\": \"double-stitched seams, lace trim attached to hemline with overlock stitch\",\n      \"closure\": \"three-button Henley placket\",\n      \"fabric_weight\": \"180 gsm\",\n      \"care\": \"machine wash cold, gentle cycle\"\n    },\n    \"provenance\": {\n      \"designer\": \"In-house design team\",\n      \"season\": \"Spring 2024\",\n      \"inspiration\": \"Soft romantic details with casual comfort\"\n    }\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759251785,
+  "id": "chatcmpl-CLY2jmRmkKvJlNCLkt4YJyFNZfYzA",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 337,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 412,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 749
+  }
+}

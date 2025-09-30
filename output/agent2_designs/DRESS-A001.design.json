@@ -1,0 +1,37 @@
+{
+  "design_id": "DRESS-A001",
+  "title": "Brown Cotton A-Line Dress with Embroidery",
+  "image_prompt": "Flat-lay product render of a brown cotton A-line dress, short sleeves, V-neck, delicate tonal embroidery along the hem and neckline, isolated on plain white background, high-detail fabric texture, visible stitching and trims, no model or mannequin.",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "A-line",
+  "sleeves": "short sleeve",
+  "neckline": "V-neck",
+  "length": "knee-length",
+  "style_fit": "regular fit",
+  "trims_and_details": [],
+  "techpack": {
+    "measurements": {
+      "bust": "36 in",
+      "waist": "30 in",
+      "hip": "38 in",
+      "length": "38 in",
+      "sleeve_length": "8 in"
+    },
+    "fabric_weight": "150 gsm",
+    "stitch_type": "lockstitch",
+    "embroidery_thread": "polyester, tonal brown",
+    "closure": "hidden side zipper",
+    "care_instructions": "machine wash cold, tumble dry low"
+  },
+  "provenance": "Designed in-house by the brand's studio, inspired by classic summer silhouettes.",
+  "design_text": "Brown Cotton A-Line Dress with Embroidery (DRESS-A001)\nColors: brown\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: A-line\nSleeves: short sleeve\nNeckline: V-neck\nLength: knee-length\nStyle / Fit: r, e, g, u, l, a, r,  , f, i, t\nTechpack: available"
+}

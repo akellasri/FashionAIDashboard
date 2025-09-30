@@ -1,0 +1,45 @@
+{
+  "design_id": "BRN-DRS-001",
+  "title": "Brown Cotton Draped Dress with Embroidered Lace Hem",
+  "image_prompt": "Flat-lay product render of a brown cotton draped flowing dress, short sleeves, V-neck, delicate embroidery along the bodice, lace hem detail, isolated on plain white background, high-detail fabric texture, visible stitching and trims, no model or mannequin.",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "Draped/Flowing",
+  "sleeves": "short sleeve",
+  "neckline": "V-neck",
+  "length": "unknown",
+  "style_fit": "unknown",
+  "trims_and_details": [
+    "lace hem"
+  ],
+  "techpack": {
+    "measurements": {
+      "bust": "unknown",
+      "waist": "unknown",
+      "hip": "unknown",
+      "length": "unknown"
+    },
+    "construction": {
+      "stitch_type": "lockstitch",
+      "seam_type": "overlock",
+      "hem_finish": "lace trim",
+      "closure": "unknown"
+    },
+    "fabric_weight": "unknown",
+    "care_instructions": [
+      "machine wash cold",
+      "line dry",
+      "iron low heat"
+    ]
+  },
+  "provenance": "Designed in-house by brand design team",
+  "design_text": "Brown Cotton Draped Dress with Embroidered Lace Hem (BRN-DRS-001)\nColors: brown\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: Draped/Flowing\nSleeves: short sleeve\nNeckline: V-neck\nLength: unknown\nStyle / Fit: u, n, k, n, o, w, n\nTrims & details: lace hem\nTechpack: available"
+}

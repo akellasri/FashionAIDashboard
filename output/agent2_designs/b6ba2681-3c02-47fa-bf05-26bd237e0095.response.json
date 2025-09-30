@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"BRN-SLK-DRS-001\",\n    \"title\": \"Brown Silk A-Line Dress\",\n    \"image_prompt\": \"Isolated flat-lay product render of a brown silk A-line dress with short sleeves and a V-neck, solid minimalist design, high-detail fabric texture, visible stitching, plain white background, no model or mannequin.\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"silk\"],\n    \"prints_patterns\": [\"solids / minimalist\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"A-line\",\n    \"sleeves\": \"short sleeve\",\n    \"neckline\": \"V-neck\",\n    \"length\": \"unknown\",\n    \"style_fit\": \"unknown\",\n    \"trims_and_details\": [],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"unknown\",\n        \"waist\": \"unknown\",\n        \"hip\": \"unknown\",\n        \"length\": \"unknown\"\n      },\n      \"construction\": {\n        \"stitching\": \"double-stitched seams\",\n        \"closure\": \"unknown\",\n        \"lining\": \"silk lining\"\n      },\n      \"care_instructions\": [\n        \"Dry clean only\",\n        \"Iron on low heat\"\n      ]\n    },\n    \"provenance\": \"unknown\"\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759179967,
+  "id": "chatcmpl-CLFMN3E8RJ8CF1yMew0g9veN4cTDJ",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 289,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 294,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 583
+  }
+}

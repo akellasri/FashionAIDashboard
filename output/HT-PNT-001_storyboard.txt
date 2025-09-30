@@ -1,0 +1,19 @@
+
+Generate a photorealistic studio image of a fashion model wearing the garment described below.
+
+Model attributes:
+- Gender: female
+- Age range: 25-32
+- Body type: slim
+- Skin tone: medium-dark
+- Pose / action: standing, natural fashion pose
+- Framing: full-body, studio frame, no close-ups
+
+Design summary:
+Title: Cute Henley Top with Lace Hem & Flared Low-Waist Jeans. Colors: pastel pink, ivory, dark blue denim, light washed denim. Fabrics: cotton jersey, lace trim, denim. Garment: Henley top and flared jeans set. Silhouette: fitted top with flared pants. Sleeves: long sleeves. Neckline: Henley neckline with button placket. Prints: solid. Notes: {'top': {'fabric': 'cotton jersey with lace trim', 'construction': 'double-stitched seams, lace hem attached with overlock stitch', 'closure': '3-button placket', 'measurements': {'length': 'hip length', 'sleeve_length': 'full sleeve'}}, 'pants': {'fabric': '12oz denim', 'construction': 'flat-felled seams, clean hemline', 'waist': 'low rise', 'fit': 'flared leg', 'measurements': {'inseam': '32 inc
+
+Requirements:
+- Preserve fabric texture, stitching, trims and colors exactly.
+- Natural lighting, neutral studio background (white/gray) or transparent background if requested.
+- No logos or text overlays.
+- Output: high-resolution image (PNG) of the model wearing the garment.

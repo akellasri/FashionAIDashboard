@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"DRESS-A001\",\n    \"title\": \"Brown Cotton A-Line Dress with Embroidered Accents\",\n    \"image_prompt\": \"flat-lay product render of a brown cotton A-line dress, short sleeves, V-neck, delicate embroidery on bodice, lace hem detail, isolated on plain white background, high-detail fabric texture, visible stitching and trims\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"cotton\"],\n    \"prints_patterns\": [\"embroidery\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"A-line\",\n    \"sleeves\": \"short sleeve\",\n    \"neckline\": \"V-neck\",\n    \"length\": \"knee-length\",\n    \"style_fit\": \"regular fit\",\n    \"trims_and_details\": [\"lace hem\"],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"36 in\",\n        \"waist\": \"30 in\",\n        \"hip\": \"38 in\",\n        \"length\": \"38 in\",\n        \"sleeve_length\": \"8 in\"\n      },\n      \"fabric_weight\": \"150 gsm\",\n      \"stitch_type\": \"lockstitch\",\n      \"closure\": \"side zipper\",\n      \"embroidery_thread\": \"polyester, color-matched to brown palette\",\n      \"lace_spec\": {\n        \"width\": \"1.5 in\",\n        \"pattern\": \"floral\",\n        \"fiber_content\": \"cotton blend\"\n      }\n    },\n    \"provenance\": \"Designed in-house, inspired by vintage summer dresses with artisanal embroidery\"\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759164112,
+  "id": "chatcmpl-CLBEe5n5KHLApi5OgLf1alY8KO3vn",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 346,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 299,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 645
+  }
+}

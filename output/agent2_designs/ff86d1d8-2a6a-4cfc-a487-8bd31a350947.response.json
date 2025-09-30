@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"DRS-2024-001\",\n    \"title\": \"Brown Draped Cotton Dress with Embroidery\",\n    \"image_prompt\": \"flat-lay product render of a brown draped flowing cotton dress, full sleeves, crew neck, delicate tonal embroidery across bodice and hem, isolated on plain white background, high-detail fabric texture, visible stitching and trims\",\n    \"color_palette\": [\"brown\"],\n    \"fabrics\": [\"cotton\"],\n    \"prints_patterns\": [\"embroidery\"],\n    \"garment_type\": \"dress\",\n    \"silhouette\": \"Draped/Flowing\",\n    \"sleeves\": \"Full sleeves\",\n    \"neckline\": \"Crew neck\",\n    \"length\": \"Midi\",\n    \"style_fit\": \"Relaxed fit\",\n    \"trims_and_details\": [\"tonal embroidery on bodice and hem\", \"narrow self-fabric waist tie\", \"keyhole button closure at back neck\"],\n    \"techpack\": {\n      \"measurements\": {\n        \"bust\": \"94 cm\",\n        \"waist\": \"90 cm\",\n        \"hip\": \"110 cm\",\n        \"length\": \"115 cm\",\n        \"sleeve_length\": \"60 cm\"\n      },\n      \"construction\": {\n        \"seams\": \"French seams\",\n        \"hem\": \"Double-fold hem\",\n        \"closure\": \"Keyhole with button at back neck\"\n      },\n      \"embroidery\": {\n        \"type\": \"Tonal floral motif\",\n        \"placement\": \"Bodice front and hemline\",\n        \"thread\": \"Polyester embroidery thread\"\n      }\n    },\n    \"provenance\": {\n      \"designer\": \"In-house design team\",\n      \"season\": \"Spring/Summer 2024\",\n      \"inspiration\": \"Bohemian elegance with artisanal embroidery\"\n    }\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759209816,
+  "id": "chatcmpl-CLN7oacGwWDNtRcI9cRow25cRBsra",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 395,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 349,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 744
+  }
+}

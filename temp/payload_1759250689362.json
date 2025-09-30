@@ -1,0 +1,17 @@
+{
+  "id": "8357d645-524e-41e8-8519-829f10a0b197",
+  "user_content": {
+    "colors": [],
+    "fabrics": [],
+    "prints": [],
+    "garment_type": "",
+    "silhouette": "",
+    "sleeves": "",
+    "neckline": "",
+    "trims_and_details": [],
+    "variants": 1,
+    "description": "A cute fitting Henley top with minimal lace frills in hemline with dainty details or in a solid colour.The pants would be low waisted with an elegant flare and clean hemline preferably dark blue jeans or light washed jeans according to the top.",
+    "user_override_prompt": "A cute fitting Henley top with minimal lace frills in hemline with dainty details or in a solid colour.The pants would be low waisted with an elegant flare and clean hemline preferably dark blue jeans or light washed jeans according to the top."
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

@@ -1,0 +1,1618 @@
+{
+  "generated_at": "2025-09-24T12:24:33.444177+00:00",
+  "records_count": 1410,
+  "top_by_category": {
+    "colors": [
+      "brown",
+      "white",
+      "grey",
+      "cream",
+      "black",
+      "red",
+      "olive",
+      "beige",
+      "blue",
+      "pink"
+    ],
+    "fabrics": [
+      "cotton",
+      "silk",
+      "linen",
+      "satin",
+      "chiffon",
+      "lace",
+      "denim",
+      "rayon",
+      "chikankari",
+      "crepe"
+    ],
+    "prints": [
+      "embroidery",
+      "solids / minimalist",
+      "florals",
+      "bandhani",
+      "ikat",
+      "block print",
+      "geometric",
+      "paisley",
+      "polka dot",
+      "floral"
+    ],
+    "silhouettes": [
+      "Draped/Flowing",
+      "A-line",
+      "Tailored",
+      "Fit-and-flare",
+      "sheath",
+      "Bodycon/Fitted",
+      "anarkali",
+      "Oversized/Baggy",
+      "slip dress",
+      "asymmetric"
+    ],
+    "sleeves": [
+      "Full sleeves",
+      "Sleeveless/Tank",
+      "short sleeve",
+      "3/4th sleeves",
+      "kimono sleeve",
+      "bell sleeve"
+    ],
+    "necklines": [
+      "Crew neck",
+      "V-neck",
+      "Collared",
+      "Halter",
+      "Square neck",
+      "Sweetheart neck",
+      "Off-shoulder",
+      "Asymmetrical/One-shoulder",
+      "Cowl neck"
+    ],
+    "garment_types": [
+      "dress",
+      "kurta",
+      "kurta-set",
+      "coord set",
+      "top",
+      "shirt",
+      "lehenga",
+      "sari",
+      "jacket",
+      "skirt"
+    ],
+    "lengths": [
+      "Full-length",
+      "Midi",
+      "Mini",
+      "Ankle-length",
+      "Maxi",
+      "Cropped",
+      "Knee-length"
+    ],
+    "groups": [
+      "Neutrals",
+      "Earth tones",
+      "Pastels"
+    ]
+  },
+  "top_combos": [
+    {
+      "combo": "color:brown | color:white",
+      "weight": 329.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | color:white",
+      "weight": 260.25,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:dress",
+      "weight": 240.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | print:solids / minimalist",
+      "weight": 239.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | color:white",
+      "weight": 199.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | print:solids / minimalist",
+      "weight": 196.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:grey",
+      "weight": 194.25,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:white",
+      "weight": 186.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | garment:dress",
+      "weight": 181.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | fabric:cotton",
+      "weight": 164.25,
+      "examples": []
+    },
+    {
+      "combo": "color:white | neck:Crew neck",
+      "weight": 160.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:brown",
+      "weight": 153.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | print:solids / minimalist",
+      "weight": 145.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | print:solids / minimalist",
+      "weight": 139.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | color:white",
+      "weight": 137.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | print:solids / minimalist",
+      "weight": 121.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | garment:dress",
+      "weight": 120.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | fabric:cotton",
+      "weight": 116.75,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:grey",
+      "weight": 114.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | sleeve:Full sleeves",
+      "weight": 113.0,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | color:white",
+      "weight": 110.75,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | neck:Crew neck",
+      "weight": 109.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | print:embroidery",
+      "weight": 106.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | print:embroidery",
+      "weight": 104.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | length:Full-length",
+      "weight": 95.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:red",
+      "weight": 93.5,
+      "examples": []
+    },
+    {
+      "combo": "color:green | color:white",
+      "weight": 93.5,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | length:Full-length",
+      "weight": 91.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | neck:Crew neck",
+      "weight": 90.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | print:solids / minimalist",
+      "weight": 90.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | fabric:silk",
+      "weight": 88.25,
+      "examples": []
+    },
+    {
+      "combo": "color:black | garment:dress",
+      "weight": 88.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | sleeve:short sleeve",
+      "weight": 87.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | garment:dress",
+      "weight": 87.0,
+      "examples": []
+    },
+    {
+      "combo": "print:solids / minimalist | sleeve:Sleeveless/Tank",
+      "weight": 86.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:silk | print:embroidery",
+      "weight": 85.25,
+      "examples": []
+    },
+    {
+      "combo": "length:Full-length | print:embroidery",
+      "weight": 85.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | neck:Crew neck",
+      "weight": 84.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | garment:kurta",
+      "weight": 80.25,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | sleeve:Sleeveless/Tank",
+      "weight": 79.0,
+      "examples": []
+    },
+    {
+      "combo": "print:solids / minimalist | sleeve:Full sleeves",
+      "weight": 79.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | sleeve:short sleeve",
+      "weight": 79.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Collared | sleeve:Full sleeves",
+      "weight": 77.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | sleeve:Sleeveless/Tank",
+      "weight": 76.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | neck:Collared",
+      "weight": 76.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | sleeve:Full sleeves",
+      "weight": 75.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | length:Midi",
+      "weight": 75.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | fabric:silk",
+      "weight": 73.25,
+      "examples": []
+    },
+    {
+      "combo": "color:white | print:florals",
+      "weight": 73.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | print:block print",
+      "weight": 72.25,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | sleeve:Sleeveless/Tank",
+      "weight": 72.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:green",
+      "weight": 69.75,
+      "examples": []
+    },
+    {
+      "combo": "garment:lehenga | length:Full-length",
+      "weight": 69.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | neck:Crew neck",
+      "weight": 69.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | sleeve:Full sleeves",
+      "weight": 68.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | fabric:cotton",
+      "weight": 68.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:shirt | neck:Collared",
+      "weight": 68.0,
+      "examples": []
+    },
+    {
+      "combo": "color:gold | color:white",
+      "weight": 67.75,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | length:Full-length",
+      "weight": 66.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:coord set",
+      "weight": 66.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:pink",
+      "weight": 65.25,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:kurta",
+      "weight": 65.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | sleeve:3/4th sleeves",
+      "weight": 64.0,
+      "examples": []
+    },
+    {
+      "combo": "length:Full-length | print:solids / minimalist",
+      "weight": 64.0,
+      "examples": []
+    },
+    {
+      "combo": "color:green | color:pink",
+      "weight": 63.5,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | print:block print",
+      "weight": 63.0,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | garment:dress",
+      "weight": 62.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | color:red",
+      "weight": 61.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | length:Midi",
+      "weight": 61.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | sleeve:Full sleeves",
+      "weight": 59.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | print:florals",
+      "weight": 58.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | color:grey",
+      "weight": 57.5,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | fabric:silk",
+      "weight": 57.5,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | sleeve:3/4th sleeves",
+      "weight": 57.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | print:embroidery",
+      "weight": 55.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:lehenga | print:embroidery",
+      "weight": 55.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | neck:Crew neck",
+      "weight": 55.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | color:brown",
+      "weight": 55.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | garment:coord set",
+      "weight": 55.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | print:embroidery",
+      "weight": 54.5,
+      "examples": []
+    },
+    {
+      "combo": "color:white | color:yellow",
+      "weight": 54.5,
+      "examples": []
+    },
+    {
+      "combo": "length:Full-length | sleeve:Full sleeves",
+      "weight": 54.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | garment:coord set",
+      "weight": 54.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:pink",
+      "weight": 53.75,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | color:pink",
+      "weight": 53.25,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:yellow",
+      "weight": 53.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | sleeve:Full sleeves",
+      "weight": 52.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | sleeve:3/4th sleeves",
+      "weight": 52.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | fabric:cotton",
+      "weight": 51.25,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | garment:dress",
+      "weight": 51.0,
+      "examples": []
+    },
+    {
+      "combo": "print:block print | sleeve:3/4th sleeves",
+      "weight": 51.0,
+      "examples": []
+    },
+    {
+      "combo": "color:green | color:grey",
+      "weight": 50.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | neck:Collared",
+      "weight": 50.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:red",
+      "weight": 49.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | neck:Collared",
+      "weight": 49.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | print:solids / minimalist",
+      "weight": 49.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:shirt",
+      "weight": 49.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | print:geometric",
+      "weight": 48.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta-set | print:embroidery",
+      "weight": 48.0,
+      "examples": []
+    },
+    {
+      "combo": "length:Midi | neck:Crew neck",
+      "weight": 48.0,
+      "examples": []
+    },
+    {
+      "combo": "color:gold | fabric:silk",
+      "weight": 47.5,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | garment:kurta",
+      "weight": 47.25,
+      "examples": []
+    },
+    {
+      "combo": "color:green | garment:dress",
+      "weight": 47.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:shirt | sleeve:Full sleeves",
+      "weight": 47.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | sleeve:short sleeve",
+      "weight": 47.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | print:block print",
+      "weight": 47.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | print:solids / minimalist",
+      "weight": 46.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | garment:kurta-set",
+      "weight": 46.0,
+      "examples": []
+    },
+    {
+      "combo": "length:Full-length | sleeve:Sleeveless/Tank",
+      "weight": 45.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | length:Full-length",
+      "weight": 45.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:silk | length:Full-length",
+      "weight": 45.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:top",
+      "weight": 45.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | silhouette:Draped/Flowing",
+      "weight": 45.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Collared | print:solids / minimalist",
+      "weight": 43.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | print:embroidery",
+      "weight": 43.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | silhouette:Draped/Flowing",
+      "weight": 43.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | sleeve:Full sleeves",
+      "weight": 42.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | neck:Collared",
+      "weight": 42.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Collared | silhouette:Tailored",
+      "weight": 42.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | print:solids / minimalist",
+      "weight": 41.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:green",
+      "weight": 40.75,
+      "examples": []
+    },
+    {
+      "combo": "length:Midi | print:solids / minimalist",
+      "weight": 40.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:silk | garment:dress",
+      "weight": 40.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | print:florals",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | silhouette:A-line",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | sleeve:3/4th sleeves",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | print:solids / minimalist",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | sleeve:short sleeve",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:coord set | print:solids / minimalist",
+      "weight": 39.0,
+      "examples": []
+    },
+    {
+      "combo": "color:green | fabric:cotton",
+      "weight": 38.5,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | fabric:cotton",
+      "weight": 38.5,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | print:solids / minimalist",
+      "weight": 38.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | print:embroidery",
+      "weight": 38.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | sleeve:Full sleeves",
+      "weight": 38.0,
+      "examples": []
+    },
+    {
+      "combo": "print:solids / minimalist | sleeve:short sleeve",
+      "weight": 38.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:top | print:solids / minimalist",
+      "weight": 38.0,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | color:red",
+      "weight": 37.75,
+      "examples": []
+    },
+    {
+      "combo": "color:red | fabric:cotton",
+      "weight": 37.75,
+      "examples": []
+    },
+    {
+      "combo": "garment:dress | print:florals",
+      "weight": 37.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | garment:shirt",
+      "weight": 37.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:gold",
+      "weight": 36.5,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | fabric:silk",
+      "weight": 36.25,
+      "examples": []
+    },
+    {
+      "combo": "color:pink | print:embroidery",
+      "weight": 36.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | silhouette:A-line",
+      "weight": 36.0,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | garment:kurta-set",
+      "weight": 36.0,
+      "examples": []
+    },
+    {
+      "combo": "print:solids / minimalist | silhouette:Draped/Flowing",
+      "weight": 36.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:shirt | print:solids / minimalist",
+      "weight": 36.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | sleeve:Sleeveless/Tank",
+      "weight": 35.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:silk | print:solids / minimalist",
+      "weight": 35.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:gold",
+      "weight": 34.75,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | sleeve:Sleeveless/Tank",
+      "weight": 34.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | sleeve:Sleeveless/Tank",
+      "weight": 34.0,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | sleeve:Sleeveless/Tank",
+      "weight": 34.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta-set | neck:Crew neck",
+      "weight": 34.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | silhouette:Draped/Flowing",
+      "weight": 34.0,
+      "examples": []
+    },
+    {
+      "combo": "length:Midi | sleeve:Sleeveless/Tank",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "color:green | neck:Crew neck",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:kurta | print:block print",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | sleeve:short sleeve",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | sleeve:short sleeve",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | garment:kurta-set",
+      "weight": 33.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | color:cream",
+      "weight": 32.25,
+      "examples": []
+    },
+    {
+      "combo": "color:grey | neck:Collared",
+      "weight": 32.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | silhouette:A-line",
+      "weight": 32.0,
+      "examples": []
+    },
+    {
+      "combo": "color:yellow | garment:dress",
+      "weight": 32.0,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | neck:Crew neck",
+      "weight": 32.0,
+      "examples": []
+    },
+    {
+      "combo": "color:black | color:blue",
+      "weight": 32.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:satin | fabric:silk",
+      "weight": 28.5,
+      "examples": []
+    },
+    {
+      "combo": "color:black | garment:kurta",
+      "weight": 28.25,
+      "examples": []
+    },
+    {
+      "combo": "color:blue | sleeve:short sleeve",
+      "weight": 28.0,
+      "examples": []
+    },
+    {
+      "combo": "color:brown | garment:sari",
+      "weight": 28.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:chikankari | print:embroidery",
+      "weight": 28.0,
+      "examples": []
+    },
+    {
+      "combo": "color:gold | print:embroidery",
+      "weight": 27.25,
+      "examples": []
+    },
+    {
+      "combo": "neck:Crew neck | print:florals",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "color:red | print:florals",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "length:Full-length | neck:Collared",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "silhouette:A-line | sleeve:3/4th sleeves",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "color:yellow | print:solids / minimalist",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "color:white | print:polka dot",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "fabric:cotton | length:Midi",
+      "weight": 27.0,
+      "examples": []
+    },
+    {
+      "combo": "garment:top | sleeve:Sleeveless/Tank",
+      "weight": 27.0,
+      "examples": []
+    }
+  ],
+  "trend_entries": [
+    {
+      "trend_id": "fabric:cotton",
+      "type": "fabric",
+      "canonical": "cotton",
+      "count": 282.0,
+      "score": 1.17884,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 164.25
+        },
+        {
+          "item": "color:brown",
+          "weight": 116.75
+        },
+        {
+          "item": "neck:Crew neck",
+          "weight": 90.0
+        },
+        {
+          "item": "print:block print",
+          "weight": 72.25
+        },
+        {
+          "item": "color:black",
+          "weight": 68.0
+        },
+        {
+          "item": "sleeve:3/4th sleeves",
+          "weight": 64.0
+        }
+      ],
+      "rank": 1,
+      "examples": [
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/patchwork-jacket-set",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/handmade-bandhani-tie-dye-fit-flare-dress?variant=40811325620373",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/kalamkari-noodle-strap-corset-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/kum-kum-deep-back-bagh-print-short-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/kaya-halter-neck-blockprint-top",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/pink-ikat-v-neck-fit-and-flare-dress",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "group:color_group:Neutrals",
+      "type": "group",
+      "canonical": "Neutrals",
+      "count": 1281.5,
+      "score": 1.152,
+      "co_occurrences": [],
+      "rank": 2,
+      "examples": [
+        {
+          "product_url": "http://nishorama.com//products/gunj-off-white-mul-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/patchwork-quilted-jacket",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://perniaspopupshop.com//saphed-men-dark-beige-pure-linen-shirt-saph092554.html",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/thread-and-dori-embroidered-lehenga-brawygulkl2vlh-brawygulkl2du-brawygulkl2bl-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/bidri-sharara-set-brawybdrsha2ku-brawybdrsha2sha-brawybdrsha2du-cw-121",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/jharoka-sequin-embroidered-saree-brawybdrsa2sa-brawybdrsa2bl-cw-49",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "print:embroidery",
+      "type": "print",
+      "canonical": "embroidery",
+      "count": 285.5,
+      "score": 1.11762,
+      "co_occurrences": [
+        {
+          "item": "color:brown",
+          "weight": 106.0
+        },
+        {
+          "item": "color:white",
+          "weight": 104.0
+        },
+        {
+          "item": "fabric:silk",
+          "weight": 85.25
+        },
+        {
+          "item": "length:Full-length",
+          "weight": 85.0
+        },
+        {
+          "item": "color:grey",
+          "weight": 55.0
+        },
+        {
+          "item": "garment:lehenga",
+          "weight": 55.0
+        }
+      ],
+      "rank": 3,
+      "examples": [
+        {
+          "product_url": "https://taruntahiliani.com/products/thread-and-dori-embroidered-lehenga-brawygulkl2vlh-brawygulkl2du-brawygulkl2bl-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/bidri-sharara-set-brawybdrsha2ku-brawybdrsha2sha-brawybdrsha2du-cw-121",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/sequin-embroidered-kurti-sharara-set-brawybdrsha1ku-brawybdrsha1sha-brawybdrsha1du-brawybdrsha1cp-cw-49",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/marori-kanjivaram-saree-brawybdrsa5sa-brawybdrsa5bl-cw-132",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/jharoka-sequin-embroidered-saree-brawybdrsa2sa-brawybdrsa2bl-cw-49",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/kashida-embroidered-saree-brawybdrsa1sa-brawybdrsa1bl-cw-85",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "group:color_group:Earth tones",
+      "type": "group",
+      "canonical": "Earth tones",
+      "count": 624.25,
+      "score": 1.11327,
+      "co_occurrences": [],
+      "rank": 4,
+      "examples": [
+        {
+          "product_url": "https://taruntahiliani.com/products/kashida-embroidered-saree-brawybdrsa1sa-brawybdrsa1bl-cw-85",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/geometric-embroidered-lehenga-with-drape-faawymoskl1lh-faawymoskl1bx-faawymoskl1dp-cw-118",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/muskan-deep-back-sleeved-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/floral-fishtail-skirt-and-corset-brawygulcs1sk-brawygulcs1cr-brawygulcs1win-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/thread-and-dori-embroidered-lehenga-brawygulkl2vlh-brawygulkl2du-brawygulkl2bl-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/mustard-parna-noodle-strap-corset-kurti",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "print:solids / minimalist",
+      "type": "print",
+      "canonical": "solids / minimalist",
+      "count": 397.0,
+      "score": 1.10985,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 239.0
+        },
+        {
+          "item": "color:brown",
+          "weight": 196.0
+        },
+        {
+          "item": "garment:dress",
+          "weight": 145.0
+        },
+        {
+          "item": "color:grey",
+          "weight": 139.0
+        },
+        {
+          "item": "color:black",
+          "weight": 121.0
+        },
+        {
+          "item": "neck:Crew neck",
+          "weight": 90.0
+        }
+      ],
+      "rank": 5,
+      "examples": [
+        {
+          "product_url": "http://nishorama.com//products/parna-noodle-strap-corset-kurti-1",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/old-wall-fences-consent-dress",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/araha-halter-neck-top",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/hans-halterneck-corset-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/mauve-kurta",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/nihaala-noodle-strap-corset-kurti",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "color:brown",
+      "type": "color",
+      "canonical": "brown",
+      "count": 580.0,
+      "score": 1.09134,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 329.0
+        },
+        {
+          "item": "print:solids / minimalist",
+          "weight": 196.0
+        },
+        {
+          "item": "color:grey",
+          "weight": 194.25
+        },
+        {
+          "item": "garment:dress",
+          "weight": 181.0
+        },
+        {
+          "item": "color:black",
+          "weight": 153.0
+        },
+        {
+          "item": "fabric:cotton",
+          "weight": 116.75
+        }
+      ],
+      "rank": 6,
+      "examples": [
+        {
+          "product_url": "https://taruntahiliani.com/products/floral-fishtail-skirt-and-corset-brawygulcs1sk-brawygulcs1cr-brawygulcs1win-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/thread-and-dori-embroidered-lehenga-brawygulkl2vlh-brawygulkl2du-brawygulkl2bl-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/mustard-parna-noodle-strap-corset-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com//products/patchwork-jacket-set?variant=46605187907832",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://nishorama.com//products/kalamkari-noodle-strap-corset-kurti",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/bidri-sharara-set-brawybdrsha2ku-brawybdrsha2sha-brawybdrsha2du-cw-121",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "color:white",
+      "type": "color",
+      "canonical": "white",
+      "count": 804.5,
+      "score": 1.05068,
+      "co_occurrences": [
+        {
+          "item": "color:brown",
+          "weight": 329.0
+        },
+        {
+          "item": "color:grey",
+          "weight": 260.25
+        },
+        {
+          "item": "garment:dress",
+          "weight": 240.0
+        },
+        {
+          "item": "print:solids / minimalist",
+          "weight": 239.0
+        },
+        {
+          "item": "color:red",
+          "weight": 199.0
+        },
+        {
+          "item": "color:black",
+          "weight": 186.0
+        }
+      ],
+      "rank": 7,
+      "examples": [
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/patchwork-jacket-set",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com//products/patchwork-jacket-set?variant=46605187907832",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/handmade-bandhani-tie-dye-fit-flare-dress?variant=40706393166",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/handmade-bandhani-tie-dye-fit-flare-dress?variant=40811325620373",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/parpaddle-fences-co-ord",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/handmade-bandhani-tie-dye-fit-flare-dress?variant=40811692327061",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "print:florals",
+      "type": "print",
+      "canonical": "florals",
+      "count": 114.0,
+      "score": 0.99942,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 73.0
+        },
+        {
+          "item": "color:brown",
+          "weight": 58.0
+        },
+        {
+          "item": "color:grey",
+          "weight": 39.0
+        },
+        {
+          "item": "garment:dress",
+          "weight": 37.0
+        },
+        {
+          "item": "neck:Crew neck",
+          "weight": 27.0
+        },
+        {
+          "item": "color:red",
+          "weight": 27.0
+        }
+      ],
+      "rank": 8,
+      "examples": [
+        {
+          "product_url": "https://taruntahiliani.com/products/floral-fishtail-skirt-and-corset-brawygulcs1sk-brawygulcs1cr-brawygulcs1win-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/cherry-blossom-dress",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com//products/old-wall-fences-welcome-dress?variant=46605186662648",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/ferns-and-petals-chanderi-hand-embroidered-dress",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/yellow-wildflower-midi-dress",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/batik-floral-fit-and-flare-dress",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "fabric:silk",
+      "type": "fabric",
+      "canonical": "silk",
+      "count": 202.5,
+      "score": 0.97224,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 88.25
+        },
+        {
+          "item": "print:embroidery",
+          "weight": 85.25
+        },
+        {
+          "item": "color:red",
+          "weight": 73.25
+        },
+        {
+          "item": "color:brown",
+          "weight": 57.5
+        },
+        {
+          "item": "color:gold",
+          "weight": 47.5
+        },
+        {
+          "item": "length:Full-length",
+          "weight": 45.0
+        }
+      ],
+      "rank": 9,
+      "examples": [
+        {
+          "product_url": "https://taruntahiliani.com/products/marori-kanjivaram-saree-brawybdrsa5sa-brawybdrsa5bl-cw-132",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/bidri-kanjivaram-saree-brawybdrsa3sa-brawybdrsa3bl-cw-121",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/bidri-bridal-lehenga-brawybdrkl3lh-brawybdrkl3du-brawybdrkl3bl-brawybdrkl3vl-cw-121",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/classic-printed-saree-faawyprtsa1bl-faawyprtsa1sa-cw-127",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/classic-pearl-detail-saree-faawynafsa2sa-faawynafsa2bx-cw-332",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/floral-organza-saree-faawygulsa1sa-faawygulsa1bl-cw-50",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    },
+    {
+      "trend_id": "color:grey",
+      "type": "color",
+      "canonical": "grey",
+      "count": 375.25,
+      "score": 0.93821,
+      "co_occurrences": [
+        {
+          "item": "color:white",
+          "weight": 260.25
+        },
+        {
+          "item": "color:brown",
+          "weight": 194.25
+        },
+        {
+          "item": "print:solids / minimalist",
+          "weight": 139.0
+        },
+        {
+          "item": "garment:dress",
+          "weight": 120.0
+        },
+        {
+          "item": "color:black",
+          "weight": 114.0
+        },
+        {
+          "item": "neck:Crew neck",
+          "weight": 84.0
+        }
+      ],
+      "rank": 10,
+      "examples": [
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/patchwork-jacket-set",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "https://taruntahiliani.com/products/thread-and-dori-embroidered-lehenga-brawygulkl2vlh-brawygulkl2du-brawygulkl2bl-cw-117",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com//products/patchwork-jacket-set?variant=46605187907832",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com/collections/everyday-k-2/products/parpaddle-fences-co-ord",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://mogradesigns.com/collections/shop/products/pink-ikat-v-neck-fit-and-flare-dress",
+          "image_url": null,
+          "title": ""
+        },
+        {
+          "product_url": "http://bykaveri.com//products/parpaddle-fences-co-ord?variant=46605187514616",
+          "image_url": null,
+          "title": ""
+        }
+      ]
+    }
+  ]
+}

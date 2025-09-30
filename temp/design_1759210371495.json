@@ -1,0 +1,45 @@
+{
+  "design_id": "DRS-2024-001",
+  "title": "Brown Cotton Embroidered Draped Dress",
+  "image_prompt": "flat-lay product render of a brown cotton draped flowing dress with full sleeves and crew neck, intricate tonal embroidery on bodice and sleeve cuffs, isolated on plain white background, high-detail fabric texture, visible stitching and trims",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "Draped/Flowing",
+  "sleeves": "Full sleeves",
+  "neckline": "Crew neck",
+  "length": "Midi",
+  "style_fit": "Relaxed fit",
+  "trims_and_details": [
+    "tonal embroidery on bodice",
+    "embroidered sleeve cuffs",
+    "hidden side zipper"
+  ],
+  "techpack": {
+    "measurements": {
+      "bust": "92 cm",
+      "waist": "76 cm",
+      "hip": "100 cm",
+      "length": "115 cm",
+      "sleeve_length": "60 cm"
+    },
+    "fabric_weight": "180 gsm",
+    "stitch_type": "lockstitch",
+    "embroidery_thread": "polyester, color-matched brown",
+    "closure": "hidden side zipper",
+    "care_instructions": "machine wash cold, line dry, warm iron on reverse"
+  },
+  "provenance": {
+    "designer": "In-house Design Team",
+    "season": "Autumn/Winter 2024",
+    "inspiration": "Earthy tones and artisanal embroidery inspired by rustic countryside aesthetics"
+  },
+  "design_text": "Brown Cotton Embroidered Draped Dress (DRS-2024-001)\nColors: brown\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: Draped/Flowing\nSleeves: Full sleeves\nNeckline: Crew neck\nLength: Midi\nStyle / Fit: R, e, l, a, x, e, d,  , f, i, t\nTrims & details: tonal embroidery on bodice, embroidered sleeve cuffs, hidden side zipper\nTechpack: available"
+}

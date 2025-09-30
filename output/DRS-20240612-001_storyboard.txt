@@ -1,0 +1,19 @@
+
+Generate a photorealistic studio image of a fashion model wearing the garment described below.
+
+Model attributes:
+- Gender: female
+- Age range: 25-32
+- Body type: athletic
+- Skin tone: medium
+- Pose / action: walk
+- Framing: full-body, studio frame, no close-ups
+
+Design summary:
+Title: Brown Cotton Embroidered Draped Dress. Colors: brown. Fabrics: cotton. Garment: dress. Silhouette: Draped/Flowing. Sleeves: Full sleeves. Neckline: Crew neck. Prints: embroidery. Notes: {'measurements': {'bust': '36 in', 'waist': '30 in', 'hip': '40 in', 'length': '45 in', 'sleeve_length': '24 in'}, 'fabric_weight': '180 gsm', 'stitch_type': 'lockstitch', 'embroidery_thread': 'polyester, color-matched', 'closure': 'concealed zipper at back', 'care_instructions': 'machine wash cold, line dry, warm iron'}
+
+Requirements:
+- Preserve fabric texture, stitching, trims and colors exactly.
+- Natural lighting, neutral studio background (white/gray) or transparent background if requested.
+- No logos or text overlays.
+- Output: high-resolution image (PNG) of the model wearing the garment.

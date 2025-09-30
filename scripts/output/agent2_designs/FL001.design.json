@@ -1,0 +1,36 @@
+{
+  "design_id": "FL001",
+  "title": "Minimalist Linen Button-Up Shirt",
+  "image_prompt": "flat-lay product render of a minimalist linen button-up shirt, isolated on plain white background, high-detail fabric texture, visible stitching, crisp collar, pearl buttons, neatly folded sleeves, no model, no mannequin, no human, no lifestyle scene",
+  "color_palette": [
+    "soft ivory",
+    "warm beige"
+  ],
+  "fabrics": [
+    "100% linen"
+  ],
+  "prints_patterns": [],
+  "garment_type": "shirt",
+  "silhouette": "straight",
+  "sleeves": "long sleeves",
+  "neckline": "classic collar",
+  "length": "hip-length",
+  "style_fit": "regular fit",
+  "trims_and_details": [
+    "pearl buttons",
+    "double-stitched seams",
+    "curved hem"
+  ],
+  "techpack": {
+    "measurements": {
+      "chest": "54 cm",
+      "shoulder": "45 cm",
+      "sleeve_length": "62 cm",
+      "shirt_length": "72 cm"
+    },
+    "fabric_weight": "150 gsm",
+    "care_instructions": "machine wash cold, line dry, warm iron"
+  },
+  "provenance": "designed in Italy, manufactured in Portugal",
+  "design_text": "Minimalist Linen Button-Up Shirt (FL001)\nColors: soft ivory, warm beige\nFabrics: 100% linen\nPrints/Patterns: none\nGarment Type: shirt\nSilhouette: straight\nSleeves: long sleeves\nNeckline: classic collar\nLength: hip-length\nStyle / Fit: r, e, g, u, l, a, r,  , f, i, t\nTrims & details: pearl buttons, double-stitched seams, curved hem\nTechpack: available"
+}

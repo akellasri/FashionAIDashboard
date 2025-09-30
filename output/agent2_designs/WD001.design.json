@@ -1,0 +1,42 @@
+{
+  "design_id": "WD001",
+  "title": "White Cotton Draped Dress with Embroidered Lace Hem",
+  "image_prompt": "flat-lay product render of a white cotton draped flowing dress, V-neckline, sleeveless, delicate white embroidery along lace hem, isolated on plain white background, high-detail fabric texture, visible stitching and trims",
+  "color_palette": [
+    "white"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "Draped/Flowing",
+  "sleeves": "sleeveless",
+  "neckline": "V-neck",
+  "length": "knee-length",
+  "style_fit": "relaxed fit",
+  "trims_and_details": [
+    "lace hem"
+  ],
+  "techpack": {
+    "front_view": "V-neck draped dress with sleeveless cut, embroidery integrated into lace hem",
+    "back_view": "simple draped back with clean finish",
+    "materials": {
+      "main_fabric": "100% cotton",
+      "trim": "cotton lace with embroidery"
+    },
+    "construction": {
+      "stitching": "double-stitched seams",
+      "hem": "lace hem attached with hidden stitches"
+    },
+    "measurements": {
+      "length": "100 cm",
+      "bust": "90 cm",
+      "waist": "70 cm"
+    }
+  },
+  "provenance": "Designed in-house by studio, inspired by summer resort wear",
+  "design_text": "White Cotton Draped Dress with Embroidered Lace Hem (WD001)\nColors: white\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: Draped/Flowing\nSleeves: sleeveless\nNeckline: V-neck\nLength: knee-length\nStyle / Fit: r, e, l, a, x, e, d,  , f, i, t\nTrims & details: lace hem\nTechpack: available"
+}

@@ -1,0 +1,40 @@
+{
+  "design_id": "BRN-SLK-DRS-001",
+  "title": "Brown Silk A-Line Dress",
+  "image_prompt": "Isolated flat-lay product render of a brown silk A-line dress with short sleeves and a V-neck, solid minimalist design, high-detail fabric texture, visible stitching, plain white background, no model or mannequin.",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "silk"
+  ],
+  "prints_patterns": [
+    "solids / minimalist"
+  ],
+  "garment_type": "dress",
+  "silhouette": "A-line",
+  "sleeves": "short sleeve",
+  "neckline": "V-neck",
+  "length": "unknown",
+  "style_fit": "unknown",
+  "trims_and_details": [],
+  "techpack": {
+    "measurements": {
+      "bust": "unknown",
+      "waist": "unknown",
+      "hip": "unknown",
+      "length": "unknown"
+    },
+    "construction": {
+      "stitching": "double-stitched seams",
+      "closure": "unknown",
+      "lining": "silk lining"
+    },
+    "care_instructions": [
+      "Dry clean only",
+      "Iron on low heat"
+    ]
+  },
+  "provenance": "unknown",
+  "design_text": "Brown Silk A-Line Dress (BRN-SLK-DRS-001)\nColors: brown\nFabrics: silk\nPrints/Patterns: solids / minimalist\nGarment Type: dress\nSilhouette: A-line\nSleeves: short sleeve\nNeckline: V-neck\nLength: unknown\nStyle / Fit: u, n, k, n, o, w, n\nTechpack: available"
+}

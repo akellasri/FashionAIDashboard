@@ -1,0 +1,17 @@
+{
+  "id": "6a184867-9627-4815-8c74-03face3fabeb",
+  "user_content": {
+    "colors": [],
+    "fabrics": [],
+    "prints": [],
+    "garment_type": "",
+    "silhouette": "",
+    "sleeves": "",
+    "neckline": "",
+    "trims_and_details": [],
+    "variants": 1,
+    "description": "Elegant Maxi Dress in Red (MDX-001) Colors: crimson red Fabrics: silk crepe Prints: solid color Garment: maxi dress Silhouette: A-line Sleeves: sleeveless Neckline: V-neck Length: floor-length Style/Fit: tailored waist, flowing skirt Trims: subtle side slit, invisible back zipper, delicate topstitching",
+    "user_override_prompt": "Elegant Maxi Dress in Red (MDX-001) Colors: crimson red Fabrics: silk crepe Prints: solid color Garment: maxi dress Silhouette: A-line Sleeves: sleeveless Neckline: V-neck Length: floor-length Style/Fit: tailored waist, flowing skirt Trims: subtle side slit, invisible back zipper, delicate topstitching"
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

@@ -1,0 +1,50 @@
+{
+  "design_id": "HTPJ001",
+  "title": "Henley Top with Lace Hem & Flared Low-Waist Jeans",
+  "image_prompt": "Flat-lay product render of a cute fitting Henley top with minimal lace frills along the hemline, dainty detailing, solid color fabric, paired with low-waisted elegant flare jeans with clean hemline, isolated on plain white background, high-detail fabric texture, visible stitching and trims.",
+  "color_palette": [
+    "soft pastel pink",
+    "dark blue denim"
+  ],
+  "fabrics": [
+    "cotton jersey",
+    "denim"
+  ],
+  "prints_patterns": [
+    "solid"
+  ],
+  "garment_type": "Henley top and flared jeans set",
+  "silhouette": "fitted top with flared pants",
+  "sleeves": "long sleeves",
+  "neckline": "Henley neckline with button placket",
+  "length": "top: hip length, pants: full length",
+  "style_fit": "top: slim fit, pants: relaxed flare",
+  "trims_and_details": [
+    "minimal lace frill hemline on top",
+    "button placket on neckline",
+    "clean hemline on jeans"
+  ],
+  "techpack": {
+    "top": {
+      "fabric": "cotton jersey",
+      "color": "soft pastel pink",
+      "neckline": "Henley with 3-button placket",
+      "sleeves": "long sleeves",
+      "hemline": "minimal lace frill",
+      "fit": "slim fit",
+      "length": "hip length",
+      "stitching": "double-needle topstitch"
+    },
+    "pants": {
+      "fabric": "denim",
+      "color": "dark blue",
+      "waist": "low-waist",
+      "silhouette": "flare",
+      "hemline": "clean finish",
+      "length": "full length",
+      "stitching": "contrast topstitch"
+    }
+  },
+  "provenance": "Designed based on user description for coordinated top and pants set.",
+  "design_text": "Henley Top with Lace Hem & Flared Low-Waist Jeans (HTPJ001)\nColors: soft pastel pink, dark blue denim\nFabrics: cotton jersey, denim\nPrints/Patterns: solid\nGarment Type: Henley top and flared jeans set\nSilhouette: fitted top with flared pants\nSleeves: long sleeves\nNeckline: Henley neckline with button placket\nLength: top: hip length, pants: full length\nStyle / Fit: t, o, p, :,  , s, l, i, m,  , f, i, t, ,,  , p, a, n, t, s, :,  , r, e, l, a, x, e, d,  , f, l, a, r, e\nTrims & details: minimal lace frill hemline on top, button placket on neckline, clean hemline on jeans\nTechpack: available"
+}

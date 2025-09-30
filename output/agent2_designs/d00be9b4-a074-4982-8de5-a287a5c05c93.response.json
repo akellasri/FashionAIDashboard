@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "```json\n[\n  {\n    \"design_id\": \"HTPJ001\",\n    \"title\": \"Henley Top with Lace Hem & Flared Low-Waist Jeans\",\n    \"image_prompt\": \"Flat-lay product render of a cute fitting Henley top in solid pastel color with minimal lace frills along the hemline, dainty detailing, paired with low-waisted flared jeans in dark blue denim. Isolated on plain white background, high-detail fabric texture, visible stitching, clean hemline, no model or mannequin.\",\n    \"color_palette\": [\"pastel pink\", \"dark blue denim\"],\n    \"fabrics\": [\"cotton jersey\", \"lace trim\", \"denim\"],\n    \"prints_patterns\": [\"solid\"],\n    \"garment_type\": \"Henley top and flared jeans set\",\n    \"silhouette\": \"fitted top with flared pants\",\n    \"sleeves\": \"long sleeves\",\n    \"neckline\": \"Henley neckline with button placket\",\n    \"length\": \"top: hip length, pants: full length\",\n    \"style_fit\": \"top: slim fit, pants: relaxed flare\",\n    \"trims_and_details\": [\"minimal lace frill hemline\", \"button placket\", \"clean hemline on jeans\"],\n    \"techpack\": {\n      \"top\": {\n        \"fabric\": \"cotton jersey with lace trim\",\n        \"construction\": \"double-stitched seams, lace hem attached with overlock stitch\",\n        \"closure\": \"3-button placket\",\n        \"measurements\": {\n          \"length\": \"hip length\",\n          \"sleeve_length\": \"full\"\n        }\n      },\n      \"pants\": {\n        \"fabric\": \"12oz denim\",\n        \"construction\": \"flat-felled seams, clean hemline\",\n        \"waist\": \"low-rise\",\n        \"fit\": \"flared leg\",\n        \"measurements\": {\n          \"inseam\": \"32 inches\",\n          \"flare_width\": \"10 inches at hem\"\n        }\n      }\n    },\n    \"provenance\": {\n      \"designer\": \"AI Fashion Assistant\",\n      \"date_created\": \"2024-07-01\",\n      \"inspiration\": \"Soft feminine details paired with classic denim flare for a balanced casual look.\"\n    }\n  }\n]\n```",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759250141,
+  "id": "chatcmpl-CLXcD7C3HQROXNVbf8Tm8IZe6x6vx",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 477,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 496,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 973
+  }
+}

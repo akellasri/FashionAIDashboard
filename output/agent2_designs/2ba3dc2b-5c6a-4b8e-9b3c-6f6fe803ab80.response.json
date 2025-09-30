@@ -1,0 +1,88 @@
+{
+  "choices": [
+    {
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "annotations": [],
+        "content": "[\n  {\n    \"design_id\": \"D001\",\n    \"title\": \"Minimalist Linen Summer Shirt\",\n    \"image_prompt\": \"flat-lay product render of a minimalist short-sleeve linen summer shirt, isolated on plain white background, high-detail fabric texture, visible stitching, clean seams, subtle buttons, no model, no mannequin, no human, no lifestyle scene\",\n    \"color_palette\": [\"soft beige\", \"warm ivory\"],\n    \"fabrics\": [\"lightweight linen\"],\n    \"prints_patterns\": [\"solid\"],\n    \"garment_type\": \"shirt\",\n    \"silhouette\": \"straight cut\",\n    \"sleeves\": \"short sleeves\",\n    \"neckline\": \"classic collar\",\n    \"length\": \"hip length\",\n    \"style_fit\": \"regular fit\",\n    \"trims_and_details\": [\"mother-of-pearl buttons\", \"double-stitched hem\"],\n    \"techpack\": {\n      \"measurements\": {\n        \"chest\": \"54cm\",\n        \"length\": \"70cm\",\n        \"sleeve_length\": \"22cm\"\n      },\n      \"fabric_weight\": \"150gsm\",\n      \"care_instructions\": \"machine wash cold, line dry\",\n      \"construction_notes\": \"double-stitched seams for durability\"\n    },\n    \"provenance\": {\n      \"designer\": \"In-house Studio\",\n      \"season\": \"SS24\",\n      \"inspiration\": \"Mediterranean coastal minimalism\"\n    }\n  }\n]",
+        "refusal": null,
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1759249829,
+  "id": "chatcmpl-CLXXB1VroOSE1qmK40L0NNPYIVfwX",
+  "model": "gpt-5-chat-latest",
+  "object": "chat.completion",
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "filtered": false,
+          "detected": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "system_fingerprint": "fp_4010ec3037",
+  "usage": {
+    "completion_tokens": 309,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 314,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 623
+  }
+}

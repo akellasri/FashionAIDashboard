@@ -1,0 +1,41 @@
+{
+  "design_id": "D001",
+  "title": "Minimalist Linen Summer Shirt",
+  "image_prompt": "flat-lay product render of a minimalist short-sleeve linen summer shirt, isolated on plain white background, high-detail fabric texture, visible stitching, clean seams, subtle buttons, no model, no mannequin, no human, no lifestyle scene",
+  "color_palette": [
+    "soft beige",
+    "warm ivory"
+  ],
+  "fabrics": [
+    "lightweight linen"
+  ],
+  "prints_patterns": [
+    "solid"
+  ],
+  "garment_type": "shirt",
+  "silhouette": "straight cut",
+  "sleeves": "short sleeves",
+  "neckline": "classic collar",
+  "length": "hip length",
+  "style_fit": "regular fit",
+  "trims_and_details": [
+    "mother-of-pearl buttons",
+    "double-stitched hem"
+  ],
+  "techpack": {
+    "measurements": {
+      "chest": "54cm",
+      "length": "70cm",
+      "sleeve_length": "22cm"
+    },
+    "fabric_weight": "150gsm",
+    "care_instructions": "machine wash cold, line dry",
+    "construction_notes": "double-stitched seams for durability"
+  },
+  "provenance": {
+    "designer": "In-house Studio",
+    "season": "SS24",
+    "inspiration": "Mediterranean coastal minimalism"
+  },
+  "design_text": "Minimalist Linen Summer Shirt (D001)\nColors: soft beige, warm ivory\nFabrics: lightweight linen\nPrints/Patterns: solid\nGarment Type: shirt\nSilhouette: straight cut\nSleeves: short sleeves\nNeckline: classic collar\nLength: hip length\nStyle / Fit: r, e, g, u, l, a, r,  , f, i, t\nTrims & details: mother-of-pearl buttons, double-stitched hem\nTechpack: available"
+}

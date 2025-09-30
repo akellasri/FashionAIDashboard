@@ -1,0 +1,54 @@
+{
+  "design_id": "DRS-001",
+  "title": "Brown Draped Cotton Dress with Embroidery",
+  "image_prompt": "flat-lay product render of a brown draped flowing cotton dress with full sleeves and crew neck, delicate tonal embroidery across bodice and hem, isolated on plain white background, high-detail fabric texture, visible stitching and trims",
+  "color_palette": [
+    "brown"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [
+    "embroidery"
+  ],
+  "garment_type": "dress",
+  "silhouette": "Draped/Flowing",
+  "sleeves": "Full sleeves",
+  "neckline": "Crew neck",
+  "length": "Midi",
+  "style_fit": "Relaxed fit",
+  "trims_and_details": [
+    "tonal embroidery on bodice and hem",
+    "narrow self-fabric waist tie",
+    "keyhole button closure at back neck"
+  ],
+  "techpack": {
+    "measurements": {
+      "bust": "36 in",
+      "waist": "34 in",
+      "hip": "38 in",
+      "length": "45 in",
+      "sleeve_length": "24 in"
+    },
+    "construction": {
+      "stitching": "double-needle topstitch",
+      "seams": "French seams",
+      "closure": "keyhole with button",
+      "hem": "rolled hem"
+    },
+    "embroidery": {
+      "type": "tonal floral motif",
+      "placement": [
+        "bodice front",
+        "hemline"
+      ],
+      "thread_color": "dark brown"
+    }
+  },
+  "provenance": {
+    "designer": "In-house Design Team",
+    "season": "Fall/Winter 2024",
+    "inspiration": "Earthy tones and artisanal craftsmanship"
+  },
+  "design_text": "Brown Draped Cotton Dress with Embroidery (DRS-001)\nColors: brown\nFabrics: cotton\nPrints/Patterns: embroidery\nGarment Type: dress\nSilhouette: Draped/Flowing\nSleeves: Full sleeves\nNeckline: Crew neck\nLength: Midi\nStyle / Fit: R, e, l, a, x, e, d,  , f, i, t\nTrims & details: tonal embroidery on bodice and hem, narrow self-fabric waist tie, keyhole button closure at back neck\nTechpack: available"
+}
