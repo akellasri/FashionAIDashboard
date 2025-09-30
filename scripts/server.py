@@ -238,6 +238,23 @@ def apply_change():
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
 
 
+@app.route("/")
+def index():
+    return jsonify(
+        {
+            "status": "ok",
+            "message": "Fashion API is running",
+            "endpoints": [
+                "/flatlay-render",
+                "/virtual-showcase",
+                "/runway",
+                "/apply-change",
+                "/assets/<path>",
+            ],
+        }
+    )
+
+
 if __name__ == "__main__":
     # run dev server
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", "8000")), debug=False)
