@@ -14,9 +14,13 @@ import { Progress } from '@/components/ui/progress'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Palette, Shirt, Zap, TrendingUp, Download, Play, Eye } from 'lucide-react'
 
-const API_ROOT = process.env.NEXT_PUBLIC_PY_API || "/api";
+// Separate APIs
+const PY_BACKEND = process.env.NEXT_PUBLIC_PY_API || "http://localhost:8000"; // Flask server
+const NEXT_API = "/api"; // Next.js routes
 
 
+// Use NEXT_PUBLIC_API_URL if set, otherwise fall back to same-origin relative paths
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 export default function FashionAIDashboard() {
   const [activeTab, setActiveTab] = useState('trends')
@@ -33,8 +37,10 @@ export default function FashionAIDashboard() {
     const loadData = async () => {
       console.log('loadData called...')
       try {
-        console.log('Fetching from /api/trends...')
-        const response = await fetch('/api/trends')
+        // inside useEffect
+        console.log('Fetching from Next.js trends route...')
+        const response = await fetch(`${NEXT_API}/trends`)
+
         console.log('Response received:', response.status)
         const data = await response.json()
         console.log('Data parsed:', data)
@@ -109,7 +115,7 @@ export default function FashionAIDashboard() {
 
     try {
       // 1) Generate design JSON from your description form
-      const genResp = await fetch('/api/generate-design', {
+      const genResp = await fetch(`${API_BASE || ''}/generate-design`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(designForm),
@@ -131,7 +137,7 @@ export default function FashionAIDashboard() {
 
       // 2) Immediately request flatlay render for that design (show image on right)
       setFlatlayUrl(null) // clear previous
-      const flatResp = await fetch('/api/flatlay-render', {
+      const flatResp = await fetch(`${API_BASE || ''}/flatlay-render`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ design }),
@@ -169,7 +175,8 @@ export default function FashionAIDashboard() {
       // Clear previous flatlay
       setFlatlayUrl(null)
 
-      const res = await fetch(`${API_ROOT}/flatlay-render`, {
+      const res = await fetch(`${PY_BACKEND}/flatlay-render`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ design: currentDesign })
@@ -209,7 +216,7 @@ export default function FashionAIDashboard() {
         ...(referenceUrl ? { reference: referenceUrl } : {}),
       };
 
-      const res = await fetch(`${API_ROOT}/virtual-showcase`, {
+      const res = await fetch(`${PY_BACKEND}/virtual-showcase`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -250,7 +257,7 @@ export default function FashionAIDashboard() {
         ...(referenceUrl ? { reference: referenceUrl } : {}),
       };
 
-      const res = await fetch(`${API_ROOT}/runway`, {
+      const res = await fetch(`${PY_BACKEND}/runway`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -292,7 +299,7 @@ export default function FashionAIDashboard() {
       };
 
       // use API_ROOT if configured otherwise fallback to relative route
-      const url = (API_ROOT ? `${API_ROOT}/apply-change` : "/api/apply-change");
+      const url = `${PY_BACKEND}/apply-change`;
 
       const res = await fetch(url, {
         method: "POST",
@@ -335,55 +342,45 @@ export default function FashionAIDashboard() {
   }
 
 
-  // Convert backend returned path (absolute windows or relative) into '/api/assets?path=...' for browser
+  // Convert backend returned path into a full asset URL for the browser
   const toAssetsUrl = (backendPath?: string | null): string | null => {
-    if (!backendPath) return null
+    if (!backendPath) return null;
 
-    // If backend already returned a full http(s) URL, use as-is
+    // already full http(s) URL
     if (/^https?:\/\//i.test(backendPath)) {
-      return backendPath
+      return backendPath;
     }
 
-    // If backend already returned our assets route (maybe with /api/assets?path=...), use it directly
-    if (backendPath.includes('/api/assets')) {
-      // ensure forward slashes and no double-encoding
-      const raw = backendPath.replace(/\\/g, '/')
-      return raw
+    // already an /assets or /api/assets URL
+    if (backendPath.includes("/api/assets") || backendPath.includes("/assets")) {
+      return backendPath.replace(/\\/g, "/");
     }
 
-    // Normalize windows backslashes, trim whitespace
-    const normalized = backendPath.replace(/\\\\/g, '/').replace(/\\/g, '/').trim()
+    // normalize backslashes
+    const normalized = backendPath.replace(/\\/g, "/").trim();
 
-    // If the backend gave us something like "renders/xxx.png" or "output/xxx.png", convert to /api/assets?path=...
-    const allowedPrefixes = ['renders/', 'output/', 'temp/', 'public/']
+    // check for allowed dirs
+    const allowedPrefixes = ["renders/", "output/", "temp/", "public/"];
     for (const pref of allowedPrefixes) {
-      const idx = normalized.indexOf(pref)
+      const idx = normalized.indexOf(pref);
       if (idx !== -1) {
-        const rel = normalized.slice(idx) // e.g. renders/DRS-001__flatlay.png
-        // use "path" query param — matches your route handler expectation
-        return `/api/assets?path=${encodeURIComponent(rel)}`
+        const rel = normalized.slice(idx);
+        if (API_BASE) return `${API_BASE}/assets/${encodeURIComponent(rel)}`;
+        return `/api/assets?path=${encodeURIComponent(rel)}`;
       }
     }
 
-    // If it's an absolute windows path like "E:/fashion-ai-dashboard/renders/xxx.png"
-    // try to find the allowed folder inside it
-    for (const pref of allowedPrefixes) {
-      const pos = normalized.toLowerCase().indexOf(pref)
-      if (pos !== -1) {
-        const rel = normalized.slice(pos)
-        return `/api/assets?path=${encodeURIComponent(rel)}`
-      }
-    }
+    // fallback
+    return API_BASE ? `${API_BASE}/${normalized.replace(/^\/+/, "")}` : `/${normalized.replace(/^\/+/, "")}`;
+  };
 
-    // fallback: treat as relative path and pass as-is
-    const rel = normalized.replace(/^\/+/, '')
-    return `/api/assets?path=${encodeURIComponent(rel)}`
-  }
 
   const withCacheBuster = (url?: string | null): string | null => {
     if (!url) return null
     return url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`
   }
+
+
 
   // 👉 ADD THIS HERE
   const toAbsoluteUrl = (rel?: string | null) => {
@@ -405,8 +402,6 @@ export default function FashionAIDashboard() {
       framing: m.framing || "full-body, studio frame, no close-ups",
     }
   }
-
-
 
 
   return (

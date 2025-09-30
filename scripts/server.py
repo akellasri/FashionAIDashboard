@@ -7,9 +7,15 @@ import tempfile
 import re
 from pathlib import Path
 from flask import Flask, request, jsonify, send_from_directory, abort
+from flask_cors import CORS
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 app = Flask(__name__, static_folder=None)
+
+# Allow cross-origin requests from anywhere (dev). For production, restrict origins:
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 # prefer explicit env var, otherwise use running interpreter
 PYTHON_EXE = os.getenv("PYTHON_PATH") or sys.executable
