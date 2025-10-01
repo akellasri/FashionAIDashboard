@@ -36,7 +36,6 @@ jobs:
 
           ###### Repository/Build Configurations ######
           app_location: "/"        # Path to your Next.js app
-          api_location: ""         # No Azure Functions backend
           output_location: ".next" # Next.js build output
           ###### End Configurations ######
 
