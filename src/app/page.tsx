@@ -15,7 +15,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Palette, Shirt, Zap, TrendingUp, Download, Play, Eye } from 'lucide-react'
 
 // Separate APIs
-const PY_BACKEND = process.env.NEXT_PUBLIC_PY_API || "http://localhost:8000"; // Flask server
+const PY_BACKEND = process.env.NEXT_PUBLIC_PY_API?.replace(/\/$/, "") || "";
 const NEXT_API = "/api"; // Next.js routes
 
 
