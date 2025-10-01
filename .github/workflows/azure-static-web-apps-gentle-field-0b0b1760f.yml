@@ -35,6 +35,7 @@ jobs:
           action: "upload"
           app_location: "/"
           output_location: ".next"
+          api_location: ""
           skip_api_build: true
 
   close_pull_request_job:
