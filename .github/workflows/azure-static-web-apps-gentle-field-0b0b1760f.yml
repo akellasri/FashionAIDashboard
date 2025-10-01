@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     env:
-      NEXT_PUBLIC_PY_API: "https://fashion-python-api-e8evb0hubtfwf8dq.eastus-01.azurewebsites.net"
+      NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies

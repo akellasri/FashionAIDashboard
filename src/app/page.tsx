@@ -15,12 +15,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Palette, Shirt, Zap, TrendingUp, Download, Play, Eye } from 'lucide-react'
 
 // Separate APIs
-const PY_BACKEND = process.env.NEXT_PUBLIC_PY_API?.replace(/\/$/, "") || "";
-const NEXT_API = "/api"; // Next.js routes
-
-
-// Use NEXT_PUBLIC_API_URL if set, otherwise fall back to same-origin relative paths
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
+const PY_BACKEND = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
+//const NEXT_API = "/api"; // still used to try Next.js routes first (optional)
+const API_BASE = PY_BACKEND; // unify any old uses
 
 export default function FashionAIDashboard() {
   const [activeTab, setActiveTab] = useState('trends')
@@ -31,25 +28,32 @@ export default function FashionAIDashboard() {
   const [loading, setLoading] = useState(true) // Start with loading = true
 
 
-  // replace your useEffect loadData() fetch with this:
+  // helper: fetch with timeout
+  const fetchWithTimeout = async (url: string, opts = {}, ms = 10000) => {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: controller.signal, ...opts } as any);
+      clearTimeout(id);
+      return res;
+    } catch (err) {
+      clearTimeout(id);
+      throw err;
+    }
+  };
+
+  // ✅ Direct backend fetch for trends
   useEffect(() => {
-    console.log('useEffect running...')
     const loadData = async () => {
-      console.log('loadData called...')
+      console.log('Fetching trends from backend:', `${PY_BACKEND}/trends`);
       try {
-        console.log('Trying Next.js API route /api/trends first...')
-        let response = await fetch(`${NEXT_API}/trends`);
-        if (!response.ok) {
-          console.warn('Next API /api/trends returned', response.status, '— falling back to Python backend');
-          response = await fetch(`${PY_BACKEND}/trends`);
-        }
-        console.log('Response received:', response.status)
-        const data = await response.json()
-        console.log('Data parsed:', data)
-        setTrendData(data)
+        const response = await fetchWithTimeout(`${PY_BACKEND}/trends`, {}, 15000);
+        if (!response.ok) throw new Error(`Backend responded with ${response.status}`);
+        const data = await response.json();
+        setTrendData(data);
       } catch (error) {
-        console.error('Error fetching trend data:', error)
-        // Fallback data
+        console.error('Error fetching trend data:', error);
+        // fallback sample data
         setTrendData({
           top_by_category: {
             colors: ['brown', 'white', 'grey'],
@@ -69,15 +73,15 @@ export default function FashionAIDashboard() {
             { type: 'color', canonical: 'brown' },
             { type: 'print', canonical: 'embroidery' }
           ]
-        })
+        });
       } finally {
-        console.log('Setting loading to false...')
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadData()
-  }, [])
+    loadData();
+  }, []);
+
 
   // Model customization state
   const [modelConfig, setModelConfig] = useState({
@@ -347,44 +351,29 @@ export default function FashionAIDashboard() {
   // Convert backend returned path into a full asset URL for the browser
   const toAssetsUrl = (backendPath?: string | null): string | null => {
     if (!backendPath) return null;
+    if (/^https?:\/\//i.test(backendPath)) return backendPath;
 
-    // already full http(s) URL
-    if (/^https?:\/\//i.test(backendPath)) {
-      return backendPath;
-    }
-
-    // already an /assets or /api/assets URL
-    if (backendPath.includes("/api/assets") || backendPath.includes("/assets")) {
-      return backendPath.replace(/\\/g, "/");
-    }
-
-    // normalize backslashes
     const normalized = backendPath.replace(/\\/g, "/").trim();
 
-    // check for allowed dirs
+    if (normalized.startsWith("/api/assets") || normalized.startsWith("/assets")) {
+      return normalized;
+    }
+
     const allowedPrefixes = ["renders/", "output/", "temp/", "public/"];
     for (const pref of allowedPrefixes) {
       const idx = normalized.indexOf(pref);
       if (idx !== -1) {
-        const rel = normalized.slice(idx);
-        if (API_BASE) return `${API_BASE}/assets/${encodeURIComponent(rel)}`;
-        return `/api/assets?path=${encodeURIComponent(rel)}`;
+        const rel = normalized.slice(idx).replace(/^\/+/, "");
+        return API_BASE ? `${API_BASE}/assets/${encodeURIComponent(rel)}` : `/assets/${encodeURIComponent(rel)}`;
       }
     }
 
-    // fallback
     return API_BASE ? `${API_BASE}/${normalized.replace(/^\/+/, "")}` : `/${normalized.replace(/^\/+/, "")}`;
   };
 
+  const withCacheBuster = (url?: string | null): string | null =>
+    url ? (url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`) : null;
 
-  const withCacheBuster = (url?: string | null): string | null => {
-    if (!url) return null
-    return url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`
-  }
-
-
-
-  // 👉 ADD THIS HERE
   const toAbsoluteUrl = (rel?: string | null) => {
     if (!rel) return null;
     if (rel.startsWith("http://") || rel.startsWith("https://")) return rel;

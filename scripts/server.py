@@ -16,12 +16,11 @@ app = Flask(__name__, static_folder=None)
 # Allow cross-origin requests from anywhere (dev). For production, restrict origins:
 CORS(
     app,
-    origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "https://gentle-field-0b0b1760f.1.azurestaticapps.net",
-    ],
+    resources={
+        r"/*": {"origins": ["https://gentle-field-0b0b1760f.1.azurestaticapps.net"]}
+    },
 )
+
 
 # prefer explicit env var, otherwise use running interpreter
 PYTHON_EXE = os.getenv("PYTHON_PATH") or sys.executable
