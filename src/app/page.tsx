@@ -31,23 +31,25 @@ export default function FashionAIDashboard() {
   const [loading, setLoading] = useState(true) // Start with loading = true
 
 
-  // Fetch trend data on component mount
+  // replace your useEffect loadData() fetch with this:
   useEffect(() => {
     console.log('useEffect running...')
     const loadData = async () => {
       console.log('loadData called...')
       try {
-        // inside useEffect
-        console.log('Fetching from Next.js trends route...')
-        const response = await fetch(`${NEXT_API}/trends`)
-
+        console.log('Trying Next.js API route /api/trends first...')
+        let response = await fetch(`${NEXT_API}/trends`);
+        if (!response.ok) {
+          console.warn('Next API /api/trends returned', response.status, '— falling back to Python backend');
+          response = await fetch(`${PY_BACKEND}/trends`);
+        }
         console.log('Response received:', response.status)
         const data = await response.json()
         console.log('Data parsed:', data)
         setTrendData(data)
       } catch (error) {
         console.error('Error fetching trend data:', error)
-        // Set fallback data
+        // Fallback data
         setTrendData({
           top_by_category: {
             colors: ['brown', 'white', 'grey'],

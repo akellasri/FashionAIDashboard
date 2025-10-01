@@ -1,15 +1,19 @@
-name: Build and deploy Python + Next.js app to Azure Web App - fashion-python-api
+name: Build and deploy Python backend to Azure Web App - fashion-python-api
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "scripts/**"
+      - "server/**"
+      - "requirements.txt"
+      - "scripts/**"
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -17,49 +21,39 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Python dependencies
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           if [ -f scripts/requirements.txt ]; then pip install -r scripts/requirements.txt; fi
 
-      # --- Setup Node.js for frontend ---
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      # (Optional) build step if backend needs transpile or collectstatic, else skip
+      - name: Archive backend
+        run: zip -r backend.zip . -x "venv/*"
 
-      - name: Install Node dependencies
-        run: npm install
-
-      - name: Build Next.js frontend
-        run: npm run build
-
-      # Upload everything for deploy
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: full-app
-          path: |
-            .
-            !venv/
+          name: backend-app
+          path: backend.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: full-app
+          name: backend-app
 
-      # ✅ Use publish profile for login (simpler, no service principal needed)
+      - name: Unzip
+        run: unzip backend.zip -d .
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: "fashion-python-api"   # <-- your Azure App Service name
+          app-name: "fashion-python-api" # Azure App Service name
           slot-name: "Production"
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: "."
