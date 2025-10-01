@@ -1,0 +1,41 @@
+{
+  "design_id": "RDSS-001",
+  "title": "Classic Red Cotton Short Sleeve Dress",
+  "image_prompt": "Flat-lay product render of a classic red cotton dress with short sleeves, A-line silhouette, crew neckline, knee-length, isolated on plain white background, high-detail fabric texture, visible stitching and trims, no model or mannequin.",
+  "color_palette": [
+    "red"
+  ],
+  "fabrics": [
+    "cotton"
+  ],
+  "prints_patterns": [],
+  "garment_type": "dress",
+  "silhouette": "A-line",
+  "sleeves": "short sleeves",
+  "neckline": "crew neckline",
+  "length": "knee-length",
+  "style_fit": "regular fit",
+  "trims_and_details": [
+    "topstitching along hem and sleeves",
+    "invisible back zipper"
+  ],
+  "techpack": {
+    "measurements": {
+      "bust": "36 in",
+      "waist": "30 in",
+      "hip": "38 in",
+      "length": "38 in",
+      "sleeve_length": "8 in"
+    },
+    "fabric_weight": "150 gsm",
+    "construction": "single needle stitching",
+    "closures": "invisible back zipper",
+    "care_instructions": "machine wash cold, tumble dry low"
+  },
+  "provenance": {
+    "designer": "Automated Fashion Assistant",
+    "date_created": "2024-07-01",
+    "inspiration": "Minimalist everyday wear with a vibrant color pop"
+  },
+  "design_text": "Classic Red Cotton Short Sleeve Dress (RDSS-001)\nColors: red\nFabrics: cotton\nPrints/Patterns: none\nGarment Type: dress\nSilhouette: A-line\nSleeves: short sleeves\nNeckline: crew neckline\nLength: knee-length\nStyle / Fit: r, e, g, u, l, a, r,  , f, i, t\nTrims & details: topstitching along hem and sleeves, invisible back zipper\nTechpack: available"
+}

@@ -1,9 +1,8 @@
-flask==2.3.2
-gunicorn==20.1.0
+Flask
 google-genai
 python-dotenv
 Pillow
 requests
-flask-cors
+Flask-CORS
 gunicorn
 

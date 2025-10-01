@@ -322,18 +322,17 @@ export default function FashionAIDashboard() {
       }
 
       // server should return updated design (in route.ts we return { success: true, design: <updated> })
-      const updated = result.design;
-      if (!updated) {
-        alert("Apply-change returned success but no updated design found.");
-        return;
-      }
-
-      // update UI
+      const updated = result.design
       setGeneratedDesign(updated);
       setCurrentDesign(updated);
-
       // update the edit box to show updated design_text (optional)
       setEditText(updated.design_text || "");
+
+      if (result.flatlay) {
+        setFlatlayUrl(withCacheBuster(result.flatlay));
+      }
+
+
 
       // Optionally auto-generate an updated flatlay (uncomment if you want)
       // await handleRenderFlatlay();

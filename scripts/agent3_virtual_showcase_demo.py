@@ -322,6 +322,12 @@ def main():
         type=str,
         help="HTTP URL to a reference image (flatlay) for conditioning",
     )
+    parser.add_argument(
+        "--description",
+        type=str,
+        help="textual description to reinforce garment details",
+        default="",
+    )
     parser.add_argument("--gender", type=str)
     parser.add_argument("--age_range", type=str)
     parser.add_argument("--body_type", type=str)

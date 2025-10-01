@@ -8,6 +8,11 @@ import re
 from pathlib import Path
 from flask import Flask, request, jsonify, send_from_directory, abort
 from flask_cors import CORS
+import uuid
+from datetime import datetime
+from shutil import which
+from typing import Optional
+import imageio_ffmpeg
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +75,129 @@ def _public_url_for_path(path_obj, req):
     return None
 
 
+def _make_runway_from_flatlay(flatlay_url, out_dir):
+    """
+    Download flatlay_url to a temp file, run ffmpeg (via imageio-ffmpeg binary)
+    to create a short panning/zooming mp4, and return the output path.
+    """
+    import tempfile, os, time
+
+    # create output dir
+    out_dir_path = Path(out_dir)
+    out_dir_path.mkdir(parents=True, exist_ok=True)
+
+    # Download the flatlay (support http(s) URLs)
+    r = requests.get(flatlay_url, stream=True, timeout=30)
+    if r.status_code != 200:
+        raise RuntimeError(f"Failed to download flatlay ({r.status_code})")
+
+    td = Path(tempfile.mkdtemp(prefix="flatlay_"))
+    in_file = td / f"flatlay_{uuid.uuid4().hex}.png"
+    with open(in_file, "wb") as fh:
+        for chunk in r.iter_content(8192):
+            if chunk:
+                fh.write(chunk)
+
+    # choose output path
+    out_file = out_dir_path / f"runway_{uuid.uuid4().hex}.mp4"
+
+    # find ffmpeg binary shipped with imageio-ffmpeg
+    ffmpeg_bin = imageio_ffmpeg.get_ffmpeg_exe()
+
+    # ffmpeg filter: scale then gentle zoompan for 6s at 30fps (180 frames)
+    # note: zoompan expression must be escaped when passed to shell; we'll use shlex.split
+    filter_complex = (
+        "scale=1280:-2,zoompan="
+        "z='zoom+0.0008':"
+        "x='iw/2-(iw/zoom/2)':"
+        "y='ih/2-(ih/zoom/2)':"
+        "d=180:s=1280x720,"
+        "fps=30,format=yuv420p"
+    )
+
+    cmd = [
+        ffmpeg_bin,
+        "-y",
+        "-loop",
+        "1",
+        "-i",
+        str(in_file),
+        "-filter_complex",
+        filter_complex,
+        "-t",
+        "6",
+        "-movflags",
+        "+faststart",
+        str(out_file),
+    ]
+
+    # run ffmpeg
+    try:
+        proc = subprocess.run(
+            cmd, check=True, capture_output=True, text=True, timeout=120
+        )
+    except subprocess.CalledProcessError as e:
+        # include ffmpeg stdout/stderr for debugging
+        raise RuntimeError(f"ffmpeg failed: {e.returncode}\n{e.stdout}\n{e.stderr}")
+    except subprocess.TimeoutExpired:
+        raise RuntimeError("ffmpeg timed out")
+
+    if not out_file.exists():
+        raise RuntimeError("ffmpeg did not produce output")
+
+    return str(out_file)
+
+
+def get_python_executable():
+    # Windows venv path
+    win_venv = PROJECT_ROOT / "scripts" / "venv" / "Scripts" / "python.exe"
+    posix_venv = PROJECT_ROOT / "scripts" / "venv" / "bin" / "python"
+    if win_venv.exists():
+        return str(win_venv)
+    if posix_venv.exists():
+        return str(posix_venv)
+    # fallbacks
+    candidate = os.getenv("PYTHON_PATH")
+    if candidate:
+        return candidate
+    # look for commonly named binaries
+    for p in ("python3.10", "python3.9", "python3", "python"):
+        which_p = which(p)
+        if which_p:
+            return which_p
+    return sys.executable
+
+
+# helper: extract first balanced JSON object/array from text
+def extract_first_json(text: str) -> Optional[str]:
+    if not text:
+        return None
+    start_obj = text.find("{")
+    start_arr = text.find("[")
+    if start_obj == -1 and start_arr == -1:
+        return None
+    # choose earliest open bracket
+    if start_obj == -1:
+        start = start_arr
+    elif start_arr == -1:
+        start = start_obj
+    else:
+        start = min(start_obj, start_arr)
+
+    open_ch = text[start]
+    close_ch = "}" if open_ch == "{" else "]"
+    depth = 0
+    for i in range(start, len(text)):
+        ch = text[i]
+        if ch == open_ch:
+            depth += 1
+        elif ch == close_ch:
+            depth -= 1
+            if depth == 0:
+                return text[start : i + 1]
+    return None
+
+
 @app.route("/assets/<path:rel_path>", methods=["GET"])
 def serve_assets(rel_path):
     # prevent traversal
@@ -81,6 +209,179 @@ def serve_assets(rel_path):
             if full.exists() and full.is_file():
                 return send_from_directory(str(PROJECT_ROOT), safe, as_attachment=False)
     abort(404)
+
+
+# helper: run render_utils and return public image URL (or error)
+def _render_flatlay_for_design(design: dict, req):
+    """
+    Writes design -> temp file, calls render_utils.py (variant=flatlay),
+    finds saved image and returns (image_url, error_string).
+    """
+    try:
+        td = tempfile.mkdtemp()
+        design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
+        design_path.write_text(
+            json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+
+        python_exec = get_python_executable()
+        cmd = [
+            python_exec,
+            str(PROJECT_ROOT / "scripts" / "render_utils.py"),
+            "--input",
+            str(design_path),
+            "--variant",
+            "flatlay",
+        ]
+        app.logger.info("Running render command: %s", " ".join(cmd))
+        rc, out, err = _run_cmd(cmd)
+        app.logger.debug(
+            "render_utils rc=%s stdout_len=%s stderr_len=%s",
+            rc,
+            len(out or ""),
+            len(err or ""),
+        )
+
+        if rc != 0:
+            return None, f"render_utils failed (rc={rc}): {err[:2000] or out[:2000]}"
+
+        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
+        if not saved:
+            return None, "render_utils finished but no saved image path found."
+
+        public = _public_url_for_path(saved, req)
+        if not public:
+            return None, "Saved file is outside allowed asset directories."
+
+        return public, None
+
+    except Exception as e:
+        app.logger.exception("Exception in _render_flatlay_for_design: %s", e)
+        return None, f"exception while rendering flatlay: {str(e)}"
+
+
+# main route: generate design from payload OR use provided design, then render flatlay and return imageUrl
+@app.route("/generate-design", methods=["POST"])
+def generate_design():
+    """
+    Accepts payload similar to your Next.js route:
+    { description, colors, fabrics, prints, garmentType, silhouette, sleeves, neckline, trims, variants }
+    If generator script exists it will be invoked; fallback produces a simple design dict.
+    After design is obtained, it immediately renders a flatlay via render_utils.py and returns:
+      { success: true, design: {...}, imageUrl: "https://.../assets/..." }
+    """
+    try:
+        body = request.get_json() or {}
+
+        # if frontend supplied an already-built design object, use it
+        if body.get("design"):
+            design = body.get("design")
+        else:
+            # Build payload similar to Next.js helper
+            user_content = {
+                "colors": body.get("colors", []),
+                "fabrics": body.get("fabrics", []),
+                "prints": body.get("prints", []),
+                "garment_type": body.get("garmentType") or body.get("garment_type"),
+                "silhouette": body.get("silhouette"),
+                "sleeves": body.get("sleeves"),
+                "neckline": body.get("neckline"),
+                "trims_and_details": ([body.get("trims")] if body.get("trims") else []),
+                "variants": body.get("variants", 1),
+                "description": body.get("description", "") or "",
+                "user_override_prompt": body.get("description", "") or "",
+            }
+
+            payload = {
+                "id": str(uuid.uuid4()),
+                "user_content": user_content,
+                "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation).",
+            }
+
+            # write payload to a temp file that generator can read
+            temp_dir = PROJECT_ROOT / "temp"
+            temp_dir.mkdir(parents=True, exist_ok=True)
+            payload_path = (
+                temp_dir / f"payload_{int(datetime.utcnow().timestamp())}.json"
+            )
+            payload_path.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+
+            # attempt to run generator script (if available). Use your real generator script path/name.
+            # If you have a different generator script, change the name below.
+            gen_script = (
+                PROJECT_ROOT / "scripts" / "test_agent2_payload.py"
+            )  # replace if you have a real generator
+            design = None
+            if gen_script.exists():
+                python_exec = get_python_executable()
+                cmd = [python_exec, str(gen_script), str(payload_path)]
+                app.logger.info("Running generator: %s", " ".join(cmd))
+                proc = subprocess.run(
+                    cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True
+                )
+                out = proc.stdout or ""
+                err = proc.stderr or ""
+                if proc.returncode == 0:
+                    extracted = extract_first_json(out)
+                    if extracted:
+                        try:
+                            parsed = json.loads(extracted)
+                            # generator may return an array or object
+                            if isinstance(parsed, list) and parsed:
+                                design = parsed[0]
+                            else:
+                                design = parsed
+                        except Exception as e:
+                            app.logger.exception(
+                                "Failed to parse JSON from generator stdout: %s", e
+                            )
+                            design = None
+                    else:
+                        app.logger.warning(
+                            "No JSON found in generator stdout; stdout head: %s",
+                            (out[:800] + "...") if out else "<empty>",
+                        )
+                else:
+                    app.logger.error(
+                        "Generator script failed (code=%s): %s",
+                        proc.returncode,
+                        err[:2000] or out[:2000],
+                    )
+
+            # fallback simple design if generator not present or parse failed
+            if not design:
+                design_id = f"design-{uuid.uuid4().hex[:8]}"
+                now = datetime.utcnow().isoformat() + "Z"
+                design = {
+                    "design_id": design_id,
+                    "generated_at": now,
+                    "design_text": payload["user_content"].get(
+                        "description", "Auto-generated look"
+                    ),
+                    "colors": payload["user_content"].get("colors", [])[:5],
+                    "fabrics": payload["user_content"].get("fabrics", [])[:5],
+                    "prints_patterns": payload["user_content"].get("prints", [])[:5],
+                    "garment_type": payload["user_content"].get("garment_type")
+                    or "dress",
+                    "silhouette": payload["user_content"].get("silhouette") or "A-line",
+                }
+
+        # render immediate flatlay
+        image_url, render_err = _render_flatlay_for_design(design, request)
+
+        result = {"success": True, "design": design}
+        if image_url:
+            result["imageUrl"] = image_url
+        else:
+            result["renderError"] = render_err
+
+        return jsonify(result)
+
+    except Exception as e:
+        app.logger.exception("generate-design unexpected error: %s", e)
+        return jsonify(success=False, error=str(e)), 500
 
 
 @app.route("/flatlay-render", methods=["POST"])
@@ -120,13 +421,20 @@ def virtual_showcase():
     design = body.get("design")
     modelConfig = body.get("modelConfig") or body.get("model_attrs") or {}
     reference = body.get("reference")  # may be absolute URL
+    # new: allow explicit description
+    description = body.get("description") or (
+        design.get("design_text") if design else None
+    )
+
     if not design:
         return jsonify(success=False, error="missing design"), 400
+
     td = tempfile.mkdtemp()
     design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
     design_path.write_text(
         json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
     args = [
         PYTHON_EXE,
         str(PROJECT_ROOT / "scripts" / "agent3_virtual_showcase_demo.py"),
@@ -137,26 +445,58 @@ def virtual_showcase():
         "--out-dir",
         str(PROJECT_ROOT / "output"),
     ]
-    if reference:
-        args += ["--reference", reference]
-    code, out, err = _run_cmd(args)
-    if code != 0:
-        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-    saved = _find_saved_path(out, err, design_id=design.get("design_id"))
-    if not saved:
-        # try output dir pattern
-        possible = Path(PROJECT_ROOT / "output").glob(
-            f"{design.get('design_id','design')}*showcase*.png"
+
+    # If reference is remote URL, download to a temp file and pass local path
+    tmp_ref_file = None
+    try:
+        if reference:
+            if reference.startswith("http://") or reference.startswith("https://"):
+                r = requests.get(reference, stream=True, timeout=60)
+                if r.status_code == 200:
+                    tmp_ref = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+                    with open(tmp_ref.name, "wb") as fh:
+                        shutil.copyfileobj(r.raw, fh)
+                    tmp_ref_file = tmp_ref.name
+                    args += ["--reference", tmp_ref_file]
+                else:
+                    # still pass the URL: some scripts accept URL directly
+                    args += ["--reference", reference]
+            else:
+                # local path already provided
+                args += ["--reference", str(reference)]
+
+        # pass description / design_text explicitly if present (helps fidelity)
+        if description:
+            args += ["--description", str(description)]
+
+        code, out, err = _run_cmd(args)
+        if code != 0:
+            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
+        if not saved:
+            possible = Path(PROJECT_ROOT / "output").glob(
+                f"{design.get('design_id','design')}*showcase*.png"
+            )
+            for f in possible:
+                saved = f
+                break
+        if not saved:
+            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+        public = _public_url_for_path(saved, request)
+        return jsonify(
+            success=True,
+            imageUrl=public,
+            message="Virtual showcase generated successfully",
         )
-        for f in possible:
-            saved = f
-            break
-    if not saved:
-        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-    public = _public_url_for_path(saved, request)
-    return jsonify(
-        success=True, imageUrl=public, message="Virtual showcase generated successfully"
-    )
+    finally:
+        # cleanup temp reference file
+        try:
+            if tmp_ref_file:
+                os.unlink(tmp_ref_file)
+        except Exception:
+            pass
 
 
 @app.route("/runway", methods=["POST"])
@@ -167,41 +507,27 @@ def runway():
     reference = body.get("reference")
     if not design:
         return jsonify(success=False, error="missing design"), 400
-    td = tempfile.mkdtemp()
-    design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
-    design_path.write_text(
-        json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-    args = [
-        PYTHON_EXE,
-        str(PROJECT_ROOT / "scripts" / "agent3_runway_demo.py"),
-        "--design",
-        str(design_path),
-        "--model-attrs",
-        json.dumps(modelConfig),
-        "--out-dir",
-        str(PROJECT_ROOT / "output"),
-    ]
+
+    # If a reference flatlay URL is provided, use the deterministic ffmpeg fallback
+    # to create a runway-video that matches the flatlay exactly.
     if reference:
-        args += ["--reference", reference]
-    code, out, err = _run_cmd(args)
-    if code != 0:
-        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-    saved = _find_saved_path(out, err, design_id=design.get("design_id"))
-    if not saved:
-        # try output dir for mp4
-        possible = Path(PROJECT_ROOT / "output").glob(
-            f"{design.get('design_id','design')}*runway*.mp4"
-        )
-        for f in possible:
-            saved = f
-            break
-    if not saved:
-        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-    public = _public_url_for_path(saved, request)
-    return jsonify(
-        success=True, videoUrl=public, message="Runway video generated successfully"
-    )
+        try:
+            out_file = _make_runway_from_flatlay(
+                reference, str(PROJECT_ROOT / "output")
+            )
+            public = _public_url_for_path(out_file, request)
+            return jsonify(
+                success=True,
+                videoUrl=public,
+                message="Runway video generated from flatlay (ffmpeg fallback)",
+            )
+        except Exception as e:
+            # If ffmpeg fallback fails, log and fall through to the original pipeline
+            # (so you still have a chance to use the heavy generator)
+            # Keep the error accessible for debugging
+            err_msg = str(e)
+            print("ffmpeg fallback error:", err_msg, file=sys.stderr)
+            # continue to original path below (optional)
 
 
 @app.route("/apply-change", methods=["POST"])
@@ -211,13 +537,16 @@ def apply_change():
     textChange = body.get("textChange") or body.get("changeText") or ""
     if not design or not textChange:
         return jsonify(success=False, error="missing design or change text"), 400
+
     td = tempfile.mkdtemp()
     design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
     change_path = Path(td) / "change.txt"
+
     design_path.write_text(
         json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     change_path.write_text(textChange, encoding="utf-8")
+
     args = [
         PYTHON_EXE,
         str(PROJECT_ROOT / "scripts" / "apply_text_change.py"),
@@ -227,26 +556,51 @@ def apply_change():
     code, out, err = _run_cmd(args)
     if code != 0:
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-    # script prints "Wrote: <path>" — try to parse stdout
-    m = re.search(r"Wrote:\s*(.*)", out)
-    if m:
-        modified = m.group(1).strip()
-        try:
-            with open(modified, "r", encoding="utf-8") as fh:
-                parsed = json.load(fh)
-                return jsonify(
-                    success=True, design=parsed, message="Design updated successfully"
-                )
-        except Exception:
-            pass
-    # fallback: try to parse stdout as JSON
+
+    # parse updated JSON
+    updated = None
     try:
-        parsed = json.loads(out.strip())
-        return jsonify(
-            success=True, design=parsed, message="Design updated from stdout"
+        m = re.search(r"Wrote:\s*(.*)", out)
+        if m:
+            with open(m.group(1).strip(), "r", encoding="utf-8") as fh:
+                updated = json.load(fh)
+        else:
+            updated = json.loads(out.strip())
+    except Exception as e:
+        return (
+            jsonify(
+                success=False,
+                error=f"Failed to parse updated design: {e}",
+                raw_stdout=out,
+            ),
+            500,
         )
-    except Exception:
-        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+    # ✅ Immediately generate a new flatlay
+    flatlay_cmd = [
+        PYTHON_EXE,
+        str(PROJECT_ROOT / "scripts" / "render_utils.py"),
+        "--input",
+        str(design_path),
+        "--variant",
+        "flatlay",
+    ]
+    code2, out2, err2 = _run_cmd(flatlay_cmd)
+    if code2 != 0:
+        return (
+            jsonify(success=False, design=updated, raw_stdout=out2, raw_stderr=err2),
+            500,
+        )
+
+    saved = _find_saved_path(out2, err2, design_id=updated.get("design_id"))
+    image_url = _public_url_for_path(saved, request) if saved else None
+
+    return jsonify(
+        success=True,
+        design=updated,
+        flatlay=image_url,
+        message="Design updated and flatlay regenerated",
+    )
 
 
 @app.route("/")

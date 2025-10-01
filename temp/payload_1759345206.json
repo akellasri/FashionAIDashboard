@@ -1,0 +1,21 @@
+{
+  "id": "7cd3546c-01a5-474a-b4b4-bfac04370cb0",
+  "user_content": {
+    "colors": [
+      "red"
+    ],
+    "fabrics": [
+      "cotton"
+    ],
+    "prints": [],
+    "garment_type": "dress",
+    "silhouette": null,
+    "sleeves": null,
+    "neckline": null,
+    "trims_and_details": [],
+    "variants": 1,
+    "description": "red dress with short sleeves",
+    "user_override_prompt": "red dress with short sleeves"
+  },
+  "system_prompt": "You are a fashion product design assistant. Respond ONLY with valid JSON (no extra explanation)."
+}

@@ -1,0 +1,19 @@
+
+Generate a photorealistic studio image of a fashion model wearing the garment described below.
+
+Model attributes:
+- Gender: female
+- Age range: 25-32
+- Body type: slim
+- Skin tone: medium-dark
+- Pose / action: standing, natural fashion pose
+- Framing: full-body, studio frame, no close-ups
+
+Design summary:
+Title: design-abc123. Colors: red. Fabrics: cotton. Garment: dress
+
+Requirements:
+- Preserve fabric texture, stitching, trims and colors exactly.
+- Natural lighting, neutral studio background (white/gray) or transparent background if requested.
+- No logos or text overlays.
+- Output: high-resolution image (PNG) of the model wearing the garment.
