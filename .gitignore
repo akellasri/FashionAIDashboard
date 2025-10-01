@@ -47,7 +47,8 @@ dev.log
 test
 prompt
 
-server.logsrc/app/_api/
+server.log
+src/app/_api/
 venv/
 node_modules/
 scripts/venv/
