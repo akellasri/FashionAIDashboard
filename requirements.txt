@@ -1,0 +1,8 @@
+Flask
+google-genai
+python-dotenv
+Pillow
+requests
+Flask-CORS
+gunicorn
+
