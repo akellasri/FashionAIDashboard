@@ -33,7 +33,10 @@ export default function FashionAIDashboard() {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), ms);
     try {
-      const res = await fetch(url, { signal: controller.signal, ...opts } as any);
+      const res = await fetch(url, {
+        signal: controller.signal,
+        ...opts,
+      });
       clearTimeout(id);
       return res;
     } catch (err) {
@@ -598,6 +601,89 @@ export default function FashionAIDashboard() {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Curated Trends (styled like other cards; shows title + regions) */}
+                {Array.isArray(trendData?.curated_trends) && (
+                  <Card className="lg:col-span-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-purple-700">
+                        <TrendingUp className="w-5 h-5" />
+                        Curated Trends
+                      </CardTitle>
+                      <CardDescription>Global & regional curated fashion insights</CardDescription>
+                    </CardHeader>
+
+                    <CardContent className="space-y-4">
+                      <div className="grid gap-4">
+                        {trendData.curated_trends
+                          .filter((t: any) =>
+                            Boolean(
+                              t &&
+                              (t.title ||
+                                (Array.isArray(t.colors) && t.colors.length) ||
+                                (Array.isArray(t.fabrics) && t.fabrics.length) ||
+                                (Array.isArray(t.patterns) && t.patterns.length) ||
+                                t.regions)
+                            )
+                          )
+                          .map((trend: any, idx: number) => (
+                            <div
+                              key={idx}
+                              className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100"
+                            >
+                              <div className="mb-2">
+                                <h4 className="font-semibold text-gray-800">
+                                  {trend.title || "Curated"}
+                                </h4>
+                              </div>
+
+                              <div className="space-y-1 text-sm text-gray-700">
+                                {trend.colors && Array.isArray(trend.colors) && trend.colors.length > 0 && (
+                                  <p>
+                                    <strong>Colors:</strong> {trend.colors.join(", ")}
+                                  </p>
+                                )}
+
+                                {trend.fabrics && Array.isArray(trend.fabrics) && trend.fabrics.length > 0 && (
+                                  <p>
+                                    <strong>Fabrics:</strong> {trend.fabrics.join(", ")}
+                                  </p>
+                                )}
+
+                                {trend.patterns && Array.isArray(trend.patterns) && trend.patterns.length > 0 && (
+                                  <p>
+                                    <strong>Patterns:</strong> {trend.patterns.join(", ")}
+                                  </p>
+                                )}
+
+                                {/* Regions object (optional) */}
+                                {trend.regions && typeof trend.regions === "object" && (
+                                  <div className="mt-2">
+                                    <strong>Regions:</strong>
+                                    <div className="mt-1 space-y-1 ml-2 text-sm">
+                                      {Object.entries(trend.regions).map(([regionName, vals]: any, i: number) => {
+                                        const list = Array.isArray(vals) ? vals.join(", ") : String(vals);
+                                        return (
+                                          <div key={i}>
+                                            <span className="font-medium">{regionName}:</span>{" "}
+                                            <span className="text-gray-700">{list}</span>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {trend.notes && <p><strong>Notes:</strong> {trend.notes}</p>}
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+
               </div>
             ) : (
               <div className="text-center py-8">

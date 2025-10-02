@@ -23,10 +23,17 @@ app = Flask(__name__, static_folder=None)
 CORS(
     app,
     resources={
-        r"/*": {"origins": ["https://gentle-field-0b0b1760f.1.azurestaticapps.net"]}
+        r"/*": {
+            "origins": [
+                "https://gentle-field-0b0b1760f.1.azurestaticapps.net",
+                "http://localhost:3000",
+                "http://127.0.0.1:3000",
+                "http://127.0.0.1:8000",
+            ]
+        }
     },
+    supports_credentials=True,
 )
-
 
 # prefer explicit env var, otherwise use running interpreter
 PYTHON_EXE = os.getenv("PYTHON_PATH") or sys.executable
@@ -702,14 +709,73 @@ def index():
 @app.route("/trends", methods=["GET"])
 def get_trends():
     try:
-        # Load the same trends_index.json your route.ts was using
         trends_file = PROJECT_ROOT / "trends_index.json"
+
+        # --- Curated extra trends (manual) ---
+        curated_trends = {
+            "curated_trends": [
+                {
+                    "title": "Sustainable Fashion",
+                    "colors": ["Earthy neutrals", "Soft olives"],
+                    "fabrics": ["Organic cotton", "Khadi", "Hemp"],
+                    "patterns": ["Ikat", "Block prints", "Minimal embroidery"],
+                },
+                {
+                    "title": "Streetwear / Gen Z",
+                    "colors": ["Tomato red", "Dusty pastels", "Neon pops"],
+                    "fabrics": ["Denim", "Recycled synthetics"],
+                    "patterns": ["Retro graphics", "Patchwork", "Checks"],
+                },
+                {
+                    "title": "Business Wear",
+                    "colors": ["Mocha browns", "Navy", "Charcoal"],
+                    "fabrics": ["Lightweight wool", "Stretch blends"],
+                    "patterns": ["Modern pinstripes", "Subtle checks"],
+                },
+                {
+                    "title": "Occasion & Bridal (India)",
+                    "colors": ["Maroon", "Emerald", "Gold", "Ivory"],
+                    "fabrics": ["Silk", "Velvet", "Brocade"],
+                    "patterns": ["Zardozi", "Mirrorwork", "Gota patti"],
+                },
+                {
+                    "title": "High-Fashion / Runway",
+                    "colors": ["Chartreuse", "Periwinkle", "Electric purple"],
+                    "fabrics": ["Metallics", "Organza", "Leather mixes"],
+                    "patterns": ["Bold florals", "Extreme tailoring"],
+                },
+                {
+                    "title": "Fusion / Indo-Western",
+                    "colors": ["Jewel tones", "Ochre", "Warm rust"],
+                    "fabrics": ["Chanderi", "Banarasi", "Khadi blends"],
+                    "patterns": ["Bandhani", "Phulkari", "Block prints"],
+                },
+                {
+                    "title": "🌎 Region-Wise Colors",
+                    "regions": {
+                        "Global": [
+                            "Mocha Mousse",
+                            "Pastel pinks",
+                            "Butter yellow",
+                            "Periwinkle",
+                        ],
+                        "India": ["Maroon", "Emerald", "Ochre", "Khadi naturals"],
+                        "US": ["Mocha", "Sandy beige", "Denim blues", "Tomato red"],
+                        "Europe": ["Chartreuse", "Electric purple", "Powder pastels"],
+                        "APAC": ["Soft pastels", "Luminous blues", "Playful brights"],
+                    },
+                },
+            ]
+        }
+
         if trends_file.exists():
             with open(trends_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
+            # Merge curated block into extracted trends
+            data.update(curated_trends)
             return jsonify(data)
         else:
-            # fallback sample data (same as in your route.ts)
+            # fallback data (your earlier sample) + curated
             fallback_data = {
                 "generated_at": "2025-09-24T12:24:33.444177+00:00",
                 "records_count": 1410,
@@ -848,7 +914,9 @@ def get_trends():
                     },
                 ],
             }
+            fallback_data.update(curated_trends)
             return jsonify(fallback_data)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
