@@ -389,13 +389,16 @@ def generate_design():
 def flatlay_render():
     body = request.get_json() or {}
     design = body.get("design") or body
-    # write to temp design file
+
+    # If the frontend provided only a description, your generate-design route
+    # should produce a design JSON first; here we assume design JSON is present.
     td = tempfile.mkdtemp()
     design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
     design_path.write_text(
         json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    # call your render_utils.py CLI
+
+    # call the render CLI
     cmd = [
         PYTHON_EXE,
         str(PROJECT_ROOT / "scripts" / "render_utils.py"),
@@ -404,15 +407,39 @@ def flatlay_render():
         "--variant",
         "flatlay",
     ]
+
     code, out, err = _run_cmd(cmd)
     if code != 0:
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
     saved = _find_saved_path(out, err, design_id=design.get("design_id"))
     if not saved:
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+    # Save local absolute path into design for other endpoints to reuse
+    try:
+        # resolved absolute path
+        saved_abs = str(saved.resolve())
+    except Exception:
+        saved_abs = str(saved)
+
+    # add the local path into the design JSON (not persisted permanently, but returned to client)
+    design["flatlay_path"] = saved_abs
+
+    # public URL for browser (same as before)
     public = _public_url_for_path(saved, request)
-    return jsonify(
-        success=True, imageUrl=public, message="Flatlay render generated successfully"
+
+    # also return saved path for backend reuse
+    return (
+        jsonify(
+            success=True,
+            imageUrl=public,
+            flatlayPath=saved_abs,
+            localPath=str(saved),
+            message="Flatlay render generated successfully",
+            design=design,
+        ),
+        200,
     )
 
 
@@ -421,59 +448,31 @@ def virtual_showcase():
     body = request.get_json() or {}
     design = body.get("design")
     modelConfig = body.get("modelConfig") or body.get("model_attrs") or {}
-    reference = body.get("reference")  # may be absolute URL or null
+    reference = body.get("reference")  # may be absolute URL
 
     if not design:
         return jsonify(success=False, error="missing design"), 400
 
-    # write design json to a temp file for the agent script
+    # Prefer local flatlay path embedded in design
+    local_reference = design.get("flatlay_path") or body.get("flatlayPath")
+
+    # If frontend sent a relative /assets path, rewrite it to local path if possible
+    if not local_reference and reference:
+        # if reference is same-site assets path, convert to local file path
+        if "/assets/" in reference:
+            # find path relative to project root
+            idx = reference.find("/assets/")
+            rel = reference[idx + len("/assets/") :]
+            candidate = PROJECT_ROOT / rel
+            if candidate.exists():
+                local_reference = str(candidate.resolve())
+
     td = tempfile.mkdtemp()
     design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
     design_path.write_text(
         json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    # If reference is a remote URL, download it to a temp file so the agent can access it
-    downloaded_reference = None
-    try:
-        if (
-            reference
-            and isinstance(reference, str)
-            and reference.lower().startswith("http")
-        ):
-            # download remote image (with timeout and streaming)
-            try:
-                r = requests.get(reference, stream=True, timeout=60)
-                r.raise_for_status()
-                # save to temp file
-                ext = ".png"
-                # try to detect extension from content-type
-                ctype = r.headers.get("Content-Type", "").lower()
-                if "jpeg" in ctype:
-                    ext = ".jpg"
-                fd, tmp_path = tempfile.mkstemp(suffix=ext, prefix="ref_", dir=td)
-                os.close(fd)
-                with open(tmp_path, "wb") as fh:
-                    for chunk in r.iter_content(chunk_size=8192):
-                        if chunk:
-                            fh.write(chunk)
-                downloaded_reference = tmp_path
-            except Exception as e:
-                # log and continue: we may still call the agent without a reference
-                print(
-                    f"[virtual_showcase] failed to download reference {reference}: {e}",
-                    file=sys.stderr,
-                )
-                downloaded_reference = None
-
-    except Exception as e:
-        print(
-            "[virtual_showcase] unexpected error while handling reference:",
-            e,
-            file=sys.stderr,
-        )
-
-    # Build agent args; pass --reference <path> only if downloaded_reference available
     args = [
         PYTHON_EXE,
         str(PROJECT_ROOT / "scripts" / "agent3_virtual_showcase_demo.py"),
@@ -484,37 +483,46 @@ def virtual_showcase():
         "--out-dir",
         str(PROJECT_ROOT / "output"),
     ]
-    if downloaded_reference:
-        args += ["--reference", str(downloaded_reference)]
-    elif reference:
-        # If reference was given but couldn't be downloaded, still include it (agent may accept URL)
-        args += ["--reference", reference]
 
-    # run the agent script
-    code, out, err = _run_cmd(args)
-    # log for diagnostics
-    print("[virtual_showcase] agent exit code:", code, file=sys.stderr)
-    print("[virtual_showcase] stdout (truncated):", (out or "")[:3000], file=sys.stderr)
-    print("[virtual_showcase] stderr (truncated):", (err or "")[:3000], file=sys.stderr)
+    # If we have a local reference, pass it via --reference-local (your script would need to support it)
+    # If your script doesn't accept a local path flag, you can pass the URL or a --reference that is a file path.
+    if local_reference:
+        args += ["--reference", local_reference]
+    elif reference:
+        # try to rewrite to localhost (avoid external roundtrip); if it fails we fall back
+        safe_ref = reference.replace(
+            request.host_url.rstrip("/"), "http://127.0.0.1:8000"
+        )
+        args += ["--reference", safe_ref]
+    # else no reference
+
+    try:
+        code, out, err = _run_cmd(args)
+    except Exception as e:
+        return jsonify(success=False, error=f"Exception launching showcase: {e}"), 500
 
     if code != 0:
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
 
     saved = _find_saved_path(out, err, design_id=design.get("design_id"))
     if not saved:
-        # try output dir pattern
+        # fallback: check output dir
         possible = Path(PROJECT_ROOT / "output").glob(
             f"{design.get('design_id','design')}*showcase*.png"
         )
         for f in possible:
             saved = f
             break
+
     if not saved:
         return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
 
     public = _public_url_for_path(saved, request)
     return jsonify(
-        success=True, imageUrl=public, message="Virtual showcase generated successfully"
+        success=True,
+        imageUrl=public,
+        flatlayPath=str(saved.resolve()),
+        message="Virtual showcase generated successfully",
     )
 
 
@@ -528,119 +536,77 @@ def runway():
     if not design:
         return jsonify(success=False, error="missing design"), 400
 
+    # prefer local flatlay path
+    local_reference = design.get("flatlay_path") or body.get("flatlayPath")
+    if not local_reference and reference and "/assets/" in reference:
+        idx = reference.find("/assets/")
+        rel = reference[idx + len("/assets/") :]
+        candidate = PROJECT_ROOT / rel
+        if candidate.exists():
+            local_reference = str(candidate.resolve())
+
     td = tempfile.mkdtemp()
+    design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
+    design_path.write_text(
+        json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    args = [
+        PYTHON_EXE,
+        str(PROJECT_ROOT / "scripts" / "agent3_runway_demo.py"),
+        "--design",
+        str(design_path),
+        "--model-attrs",
+        json.dumps(modelConfig),
+        "--out-dir",
+        str(PROJECT_ROOT / "output"),
+    ]
+
+    if local_reference:
+        args += ["--reference", local_reference]
+    elif reference:
+        safe_ref = reference.replace(
+            request.host_url.rstrip("/"), "http://127.0.0.1:8000"
+        )
+        args += ["--reference", safe_ref]
+
     try:
-        # write design json to temp file
-        design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
-        design_path.write_text(
-            json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-
-        # Download reference if it's a remote URL so downstream tools (ffmpeg, scripts) have a local file
-        downloaded_reference = None
-        try:
-            if (
-                reference
-                and isinstance(reference, str)
-                and reference.lower().startswith("http")
-            ):
-                r = requests.get(reference, stream=True, timeout=60)
-                r.raise_for_status()
-                # pick extension from content-type or default to .png
-                ext = ".png"
-                ctype = (r.headers.get("Content-Type") or "").lower()
-                if "jpeg" in ctype or "jpg" in ctype:
-                    ext = ".jpg"
-                fd, tmp_path = tempfile.mkstemp(suffix=ext, prefix="ref_", dir=td)
-                os.close(fd)
-                with open(tmp_path, "wb") as fh:
-                    for chunk in r.iter_content(chunk_size=8192):
-                        if chunk:
-                            fh.write(chunk)
-                downloaded_reference = tmp_path
-        except requests.RequestException as e:
-            # log but continue; agent may accept URL or proceed without reference
-            print(
-                f"[runway] failed to download reference {reference}: {e}",
-                file=sys.stderr,
-            )
-            downloaded_reference = None
-
-        # build args for the agent script
-        args = [
-            PYTHON_EXE,
-            str(PROJECT_ROOT / "scripts" / "agent3_runway_demo.py"),
-            "--design",
-            str(design_path),
-            "--model-attrs",
-            json.dumps(modelConfig),
-            "--out-dir",
-            str(PROJECT_ROOT / "output"),
-        ]
-
-        if downloaded_reference:
-            args += ["--reference", str(downloaded_reference)]
-        elif reference:
-            # pass remote URL as fallback (agent may accept it)
-            args += ["--reference", reference]
-
-        # run the agent script (blocking)
         code, out, err = _run_cmd(args)
-
-        # debug logging (appears in Azure logs)
-        print("[runway] agent exit code:", code, file=sys.stderr)
-        print("[runway] stdout (truncated):", (out or "")[:4000], file=sys.stderr)
-        print("[runway] stderr (truncated):", (err or "")[:4000], file=sys.stderr)
-
-        if code != 0:
-            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-
-        # locate produced runway video (or mp4) using same helper
-        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
-        if not saved:
-            # fallback: search output directory for runway mp4 pattern
-            for f in sorted(
-                Path(PROJECT_ROOT / "output").glob(
-                    f"{design.get('design_id','design')}*runway*.mp4"
-                ),
-                key=lambda p: p.stat().st_mtime,
-                reverse=True,
-            ):
-                saved = f
-                break
-
-        if not saved:
-            return (
-                jsonify(
-                    success=False,
-                    raw_stdout=out,
-                    raw_stderr=err,
-                    error="No runway artifact found",
-                ),
-                500,
-            )
-
-        public = _public_url_for_path(saved, request)
-        return jsonify(
-            success=True, videoUrl=public, message="Runway video generated successfully"
-        )
-
     except Exception as e:
-        # catch-all - always return JSON on error
-        print("[runway] unexpected error:", str(e), file=sys.stderr)
-        return jsonify(success=False, error=str(e)), 500
+        return jsonify(success=False, error=f"Exception launching runway: {e}"), 500
 
-    finally:
-        # optionally cleanup downloaded_reference (leave output files intact)
-        try:
-            if (
-                "downloaded_reference" in locals()
-                and downloaded_reference
-                and os.path.exists(downloaded_reference)
-            ):
-                os.remove(downloaded_reference)
-        except Exception:
-            pass
+    if code != 0:
+        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+    # find produced runway mp4
+    saved = None
+    possible = list(
+        (PROJECT_ROOT / "output").glob(
+            f"{design.get('design_id','design')}*runway*.mp4"
+        )
+    )
+    if possible:
+        saved = possible[-1]
+    else:
+        # try to parse stdout for "Saved:" path
+        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
+
+    if not saved:
+        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+    try:
+        public = _public_url_for_path(saved, request)
+        return (
+            jsonify(
+                success=True,
+                videoUrl=public,
+                localPath=str(saved),  # add localPath for consistency
+                message="Runway video generated successfully",
+            ),
+            200,
+        )
+    except Exception as e:
+        return jsonify(success=False, error=str(e)), 500
 
 
 @app.route("/apply-change", methods=["POST"])

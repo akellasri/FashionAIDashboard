@@ -56,23 +56,139 @@ export default function FashionAIDashboard() {
         // fallback sample data
         setTrendData({
           top_by_category: {
-            colors: ['brown', 'white', 'grey'],
-            fabrics: ['cotton', 'silk'],
-            prints: ['embroidery', 'florals'],
-            silhouettes: ['A-line', 'Draped/Flowing'],
-            sleeves: ['Full sleeves', 'Sleeveless/Tank'],
-            necklines: ['Crew neck', 'V-neck'],
-            garment_types: ['dress', 'kurta', 'top']
+            colors: [
+              "brown",
+              "white",
+              "grey",
+              "cream",
+              "black",
+              "red",
+              "olive",
+              "beige",
+              "blue",
+              "pink",
+            ],
+            fabrics: [
+              "cotton",
+              "silk",
+              "linen",
+              "satin",
+              "chiffon",
+              "lace",
+              "denim",
+              "rayon",
+              "chikankari",
+              "crepe",
+            ],
+            prints: [
+              "embroidery",
+              "solids / minimalist",
+              "florals",
+              "bandhani",
+              "ikat",
+              "block print",
+              "geometric",
+              "paisley",
+              "polka dot",
+              "floral",
+            ],
+            silhouettes: [
+              "Draped/Flowing",
+              "A-line",
+              "Tailored",
+              "Fit-and-flare",
+              "sheath",
+              "Bodycon/Fitted",
+              "anarkali",
+              "Oversized/Baggy",
+              "slip dress",
+              "asymmetric",
+            ],
+            sleeves: [
+              "Full sleeves",
+              "Sleeveless/Tank",
+              "short sleeve",
+              "3/4th sleeves",
+              "kimono sleeve",
+              "bell sleeve",
+            ],
+            necklines: [
+              "Crew neck",
+              "V-neck",
+              "Collared",
+              "Halter",
+              "Square neck",
+              "Sweetheart neck",
+              "Off-shoulder",
+              "Asymmetrical/One-shoulder",
+              "Cowl neck",
+            ],
+            garment_types: [
+              "dress",
+              "kurta",
+              "kurta-set",
+              "coord set",
+              "top",
+              "shirt",
+              "lehenga",
+              "sari",
+              "jacket",
+              "skirt",
+            ],
+            lengths: [
+              "Full-length",
+              "Midi",
+              "Mini",
+              "Ankle-length",
+              "Maxi",
+              "Cropped",
+              "Knee-length",
+            ],
           },
           top_combos: [
             { combo: 'color:brown | color:white', weight: 329 },
-            { combo: 'color:grey | color:white', weight: 260 }
+            { combo: 'color:grey | color:white', weight: 260 },
+            { combo: "color:white | garment:dress", weight: 240 },
+            { combo: "color:white | print:solids / minimalist", weight: 239 },
+            { combo: "color:red | color:white", weight: 199 },
           ],
           trend_entries: [
-            { type: 'fabric', canonical: 'cotton' },
-            { type: 'color', canonical: 'brown' },
-            { type: 'print', canonical: 'embroidery' }
-          ]
+            {
+              trend_id: "fabric:cotton",
+              type: "fabric",
+              canonical: "cotton",
+              count: 282,
+              score: 1.18,
+            },
+            {
+              trend_id: "print:embroidery",
+              type: "print",
+              canonical: "embroidery",
+              count: 285,
+              score: 1.12,
+            },
+            {
+              trend_id: "print:solids / minimalist",
+              type: "print",
+              canonical: "solids / minimalist",
+              count: 397,
+              score: 1.11,
+            },
+            {
+              trend_id: "color:brown",
+              type: "color",
+              canonical: "brown",
+              count: 580,
+              score: 1.09,
+            },
+            {
+              trend_id: "color:white",
+              type: "color",
+              canonical: "white",
+              count: 804,
+              score: 1.05,
+            },
+          ],
         });
       } finally {
         setLoading(false);
@@ -107,115 +223,120 @@ export default function FashionAIDashboard() {
   const [generatedDesign, setGeneratedDesign] = useState(null)
   const [currentDesign, setCurrentDesign] = useState<any | null>(null)
   const [flatlayUrl, setFlatlayUrl] = useState<string | null>(null)
+  const [flatlayLocalPath, setFlatlayLocalPath] = useState<string | null>(null);
   const [showcaseUrl, setShowcaseUrl] = useState<string | null>(null)
   const [runwayUrl, setRunwayUrl] = useState<string | null>(null)
   // state for edit box + apply-change flow
   const [editText, setEditText] = useState<string>("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationProgress, setGenerationProgress] = useState(0);
   const [applyingChange, setApplyingChange] = useState(false);
 
 
 
+  // -----------------------
+  // Generate Design + Flatlay
+  // -----------------------
   const handleGenerateDesign = async () => {
-    setIsGenerating(true)
-    setGenerationProgress(0)
+    setIsGenerating(true);
+    setGenerationProgress(0);
 
     try {
-      // 1) Generate design JSON from your description form
-      const genResp = await fetch(`${API_BASE || ''}/generate-design`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const genResp = await fetch(`${API_BASE || ""}/generate-design`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(designForm),
-      })
-      const genResult = await genResp.json()
+      });
+      const genResult = await genResp.json();
 
       if (!(genResp.ok && genResult.success && genResult.design)) {
-        console.error('Design generation failed:', genResult)
-        alert('Design generation failed: ' + (genResult.error || JSON.stringify(genResult)))
-        return
+        alert("Design generation failed");
+        return;
       }
 
-      const design = genResult.design
-      console.log('Design generated:', design)
+      const design = genResult.design;
+      setGeneratedDesign(design);
+      setCurrentDesign(design);
 
-      // Save design to state so virtual-showcase/runway use the same design
-      setGeneratedDesign(design)
-      setCurrentDesign(design)
-
-      // 2) Immediately request flatlay render for that design (show image on right)
-      setFlatlayUrl(null) // clear previous
-      const flatResp = await fetch(`${API_BASE || ''}/flatlay-render`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      // request flatlay
+      setFlatlayUrl(null);
+      const flatResp = await fetch(`${PY_BACKEND}/flatlay-render`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ design }),
-      })
-      const flatResult = await flatResp.json()
+      });
+      const flatResult = await flatResp.json();
 
       if (flatResp.ok && flatResult.success) {
-        // normalize the returned path to /api/assets?path=...
-        const assets = toAssetsUrl(flatResult.imageUrl || flatResult.savedPath || flatResult.saved_path)
-        setFlatlayUrl(withCacheBuster(assets))
-        console.log('Flatlay generated, assets url:', assets)
+        const assets = toAssetsUrl(
+          flatResult.imageUrl || flatResult.savedPath || flatResult.saved_path
+        );
+        setFlatlayUrl(withCacheBuster(assets));
+        if (flatResult.localPath) setFlatlayLocalPath(flatResult.localPath);
+
+        console.log("Flatlay generated:", assets, flatResult.localPath);
       } else {
-        console.error('Flatlay generation failed:', flatResult)
-        alert('Flatlay failed: ' + (flatResult.error || JSON.stringify(flatResult)))
+        alert("Flatlay failed");
       }
     } catch (err: any) {
-      console.error('Error generating design/flatlay:', err)
-      alert('Error: ' + (err?.message || String(err)))
+      alert("Error: " + (err?.message || String(err)));
     } finally {
-      setIsGenerating(false)
-      setGenerationProgress(100)
+      setIsGenerating(false);
+      setGenerationProgress(100);
     }
-  }
+  };
 
 
-
-
+  // -----------------------
+  // Render Flatlay manually
+  // -----------------------
   async function handleRenderFlatlay() {
     if (!currentDesign) {
-      alert('Please generate or select a design first.')
-      return
+      alert("Please generate or select a design first.");
+      return;
     }
 
     try {
-      // Clear previous flatlay
-      setFlatlayUrl(null)
-
+      setFlatlayUrl(null);
       const res = await fetch(`${PY_BACKEND}/flatlay-render`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ design: currentDesign }),
+      });
+      const result = await res.json();
 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ design: currentDesign })
-      })
-      const result = await res.json()
       if (result?.success) {
-        const assets = toAssetsUrl(result.imageUrl || result.savedPath || result.saved_path)
-        setFlatlayUrl(withCacheBuster(assets))
-        console.log('Flatlay generated, assets url:', assets)
+        const assets = toAssetsUrl(
+          result.imageUrl || result.savedPath || result.saved_path
+        );
+        setFlatlayUrl(withCacheBuster(assets));
+        if (result.localPath) setFlatlayLocalPath(result.localPath);
+
+        console.log("Flatlay regenerated:", assets, result.localPath);
       } else {
-        console.error('Flatlay failed:', result)
-        alert('Flatlay generation failed: ' + (result.error || JSON.stringify(result)))
+        alert("Flatlay generation failed");
       }
-    } catch (err) {
-      console.error('Error in handleRenderFlatlay:', err)
-      alert('Flatlay generation error: ' + (err as Error).message)
+    } catch (err: any) {
+      alert("Flatlay generation error: " + err.message);
     }
   }
 
-
+  // -----------------------
+  // Virtual Showcase
+  // -----------------------
   async function handleVirtualShowcase(modelConfig: any) {
     if (!currentDesign) {
-      alert('Please generate or select a design first.');
+      alert("Please generate or select a design first.");
       return;
     }
 
     try {
       setShowcaseUrl(null);
 
-      const referenceUrl = toAbsoluteUrl(flatlayUrl);
+      // Prefer localPath if available
+      const referenceUrl = flatlayLocalPath || toAbsoluteUrl(flatlayUrl);
 
       const normalized = normalizeModelConfigForBackend(modelConfig);
-
       const body = {
         design: currentDesign,
         modelConfig: normalized,
@@ -223,40 +344,43 @@ export default function FashionAIDashboard() {
       };
 
       const res = await fetch(`${PY_BACKEND}/virtual-showcase`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       const result = await res.json();
 
       if (result?.success) {
-        const assets = toAssetsUrl(result.imageUrl || result.savedPath || result.saved_path);
+        const assets = toAssetsUrl(
+          result.imageUrl || result.savedPath || result.saved_path
+        );
         setShowcaseUrl(assets ? withCacheBuster(assets) ?? assets : null);
-        console.log('Virtual showcase generated:', assets);
+        console.log("Virtual showcase generated:", assets);
       } else {
-        console.error('Virtual showcase failed:', result);
-        alert('Virtual showcase failed: ' + (result.error || JSON.stringify(result)));
+        alert("Virtual showcase failed");
       }
     } catch (err: any) {
-      console.error('Error in handleVirtualShowcase:', err);
-      alert('Virtual showcase error: ' + (err?.message || String(err)));
+      alert("Virtual showcase error: " + err.message);
     }
   }
 
+
+  // -----------------------
+  // Runway
+  // -----------------------
   async function handleRunway(modelConfig: any) {
     if (!currentDesign) {
-      alert('Please generate or select a design first.');
+      alert("Please generate or select a design first.");
       return;
     }
 
     try {
       setRunwayUrl(null);
 
-      const referenceUrl = toAbsoluteUrl(flatlayUrl);
+      const referenceUrl = flatlayLocalPath || toAbsoluteUrl(flatlayUrl);
 
       const normalized = normalizeModelConfigForBackend(modelConfig);
-
       const body = {
         design: currentDesign,
         modelConfig: normalized,
@@ -264,27 +388,30 @@ export default function FashionAIDashboard() {
       };
 
       const res = await fetch(`${PY_BACKEND}/runway`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       const result = await res.json();
 
       if (result?.success) {
-        const assets = toAssetsUrl(result.videoUrl || result.savedPath || result.video_path);
+        const assets = toAssetsUrl(
+          result.videoUrl || result.savedPath || result.video_path
+        );
         setRunwayUrl(assets ? withCacheBuster(assets) ?? assets : null);
-        console.log('Runway generated:', assets);
+        console.log("Runway generated:", assets);
       } else {
-        console.error('Runway failed:', result);
-        alert('Runway generation failed: ' + (result.error || JSON.stringify(result)));
+        alert("Runway generation failed");
       }
     } catch (err: any) {
-      console.error('Runway error:', err);
-      alert('Runway error: ' + (err?.message || String(err)));
+      alert("Runway error: " + err.message);
     }
   }
 
+  // -----------------------
+  // Apply Change
+  // -----------------------
   async function handleApplyChange() {
     if (!currentDesign) {
       alert("Please generate or select a design first.");
@@ -297,50 +424,28 @@ export default function FashionAIDashboard() {
 
     try {
       setApplyingChange(true);
+      const body = { design: currentDesign, textChange: editText.trim() };
 
-      // build body expected by your backend route: { design, textChange }
-      const body = {
-        design: currentDesign,
-        textChange: editText.trim(),
-      };
-
-      // use API_ROOT if configured otherwise fallback to relative route
       const url = `${PY_BACKEND}/apply-change`;
-
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
       const result = await res.json();
 
       if (!res.ok || !result.success) {
-        console.error("Apply change failed:", result);
-        alert("Apply change failed: " + (result.error || JSON.stringify(result)));
+        alert("Apply change failed");
         return;
       }
 
-      // server should return updated design (in route.ts we return { success: true, design: <updated> })
-      const updated = result.design
+      const updated = result.design;
       setGeneratedDesign(updated);
       setCurrentDesign(updated);
-      // update the edit box to show updated design_text (optional)
       setEditText(updated.design_text || "");
-
-      if (result.flatlay) {
-        setFlatlayUrl(withCacheBuster(result.flatlay));
-      }
-
-
-
-      // Optionally auto-generate an updated flatlay (uncomment if you want)
-      // await handleRenderFlatlay();
-
       alert("Design updated successfully.");
     } catch (err: any) {
-      console.error("Error in handleApplyChange:", err);
-      alert("Error applying change: " + (err?.message || String(err)));
+      alert("Error applying change: " + err.message);
     } finally {
       setApplyingChange(false);
     }
