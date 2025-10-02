@@ -228,8 +228,6 @@ export default function FashionAIDashboard() {
   const [runwayUrl, setRunwayUrl] = useState<string | null>(null)
   // state for edit box + apply-change flow
   const [editText, setEditText] = useState<string>("");
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generationProgress, setGenerationProgress] = useState(0);
   const [applyingChange, setApplyingChange] = useState(false);
 
 

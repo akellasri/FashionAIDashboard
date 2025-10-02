@@ -22,6 +22,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image
 from urllib.parse import quote as urlquote
+import requests
+import time
+from urllib.parse import urlparse
+
 
 # load .env.local from project root (one level up)
 project_root = Path(__file__).resolve().parents[1]
@@ -80,6 +84,65 @@ Requirements:
 - No logos or text overlays.
 - Output: high-resolution image (PNG) of the model wearing the garment.
 """
+
+
+# new helper: download an HTTP(S) reference into out_dir, with retries
+def download_reference_to_local(
+    reference_url: str, out_dir: Path, max_retries: int = 3, timeout: int = 120
+):
+    """
+    If reference_url is HTTP(S) this will attempt to download it into out_dir and return the local Path.
+    Otherwise returns None.
+    """
+    if not reference_url:
+        return None
+
+    parsed = urlparse(reference_url)
+    if parsed.scheme not in ("http", "https"):
+        return None
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    local_name = Path(parsed.path).name
+    # ensure extension present
+    if not Path(local_name).suffix:
+        local_name = local_name + ".png"
+    local_path = out_dir / f"ref_{local_name}"
+
+    attempt = 0
+    while attempt < max_retries:
+        try:
+            # streaming get, respect server timeouts
+            headers = {"User-Agent": "agent3-virtual-showcase/1.0"}
+            r = requests.get(
+                reference_url, headers=headers, stream=True, timeout=timeout
+            )
+            r.raise_for_status()
+            with open(local_path, "wb") as fh:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        fh.write(chunk)
+            # quick sanity check file size > 100 bytes
+            if local_path.exists() and local_path.stat().st_size > 100:
+                print(
+                    f"[AUTO-REF] Downloaded reference to {local_path}", file=sys.stderr
+                )
+                return str(local_path)
+            else:
+                print(
+                    f"[AUTO-REF] Downloaded file too small: {local_path}",
+                    file=sys.stderr,
+                )
+        except Exception as ex:
+            attempt += 1
+            print(
+                f"[AUTO-REF] download attempt {attempt} failed: {ex}", file=sys.stderr
+            )
+            time.sleep(1 + attempt * 1.5)
+    print(
+        f"[AUTO-REF] Failed to download reference after {max_retries} attempts: {reference_url}",
+        file=sys.stderr,
+    )
+    return None
 
 
 def design_to_summary(d: dict) -> str:
@@ -249,7 +312,11 @@ def showcase_from_design_file(
 
     # Build prompt string; include reference URL in-line (simple, stable)
     if reference_url:
-        prompt_with_ref = f"Reference image: {reference_url}\n\n{prompt}"
+        # If reference_url looks like a local file path, include that explicitly AND the public URL comment.
+        if Path(reference_url).exists():
+            prompt_with_ref = f"Reference image file: {reference_url}\n\n{prompt}"
+        else:
+            prompt_with_ref = f"Reference image: {reference_url}\n\n{prompt}"
     else:
         prompt_with_ref = prompt
 
@@ -341,11 +408,11 @@ def main():
     if args.reference and args.reference.startswith("/"):
         args.reference = f"http://localhost:3000{args.reference}"
 
-    # --- NEW: Auto-detect flatlay render and build reference URL when not provided ---
+        # --- AUTO-REF: if we have an HTTP reference or can find a local render, prefer to use a local file ---
+    downloaded_local_ref = None
     if args.design and not args.reference:
         try:
             design_path = Path(args.design)
-            # read design_id if file exists, else use stem
             if design_path.exists():
                 try:
                     d = json.loads(design_path.read_text(encoding="utf-8"))
@@ -354,12 +421,18 @@ def main():
                     design_id = design_path.stem
             else:
                 design_id = design_path.stem
-            # expected render file in project renders/
             expected_file = project_root / "renders" / f"{design_id}__flatlay.png"
             if expected_file.exists():
+                # form the public URL if REFERENCE_BASE used by caller, but also keep a local fallback
                 encoded = urlquote(f"renders/{expected_file.name}", safe="")
-                args.reference = f"{REFERENCE_BASE}/api/assets?path={encoded}"
-                print(f"[AUTO-REF] Using reference {args.reference}", file=sys.stderr)
+                public_url = f"{REFERENCE_BASE}/api/assets?path={encoded}"
+                args.reference = public_url
+                print(
+                    f"[AUTO-REF] Using public reference URL {args.reference}",
+                    file=sys.stderr,
+                )
+                # Also try to make a local copy for the agent to avoid remote GETs
+                downloaded_local_ref = str(expected_file)
             else:
                 print(
                     f"[AUTO-REF] No flatlay found at {expected_file}", file=sys.stderr
@@ -367,7 +440,25 @@ def main():
         except Exception as e:
             print(f"[AUTO-REF] Failed auto-reference check: {e}", file=sys.stderr)
 
-    print("Using reference:", args.reference, file=sys.stderr)
+    # If caller passed an HTTP(S) reference, try to download it into out_dir for faster/safer access
+    reference_local_path = None
+    if args.reference and args.reference.startswith(("http://", "https://")):
+        # try to download into out_dir (use temporary folder inside out_dir to persist)
+        local_candidate = download_reference_to_local(
+            args.reference, Path(args.out_dir) / "refs", max_retries=3, timeout=120
+        )
+        if local_candidate:
+            reference_local_path = local_candidate
+    # If we had an expected_file above, prefer that local file
+    if downloaded_local_ref:
+        reference_local_path = downloaded_local_ref
+
+    # pass 'reference_local_path' into showcase_from_design_file via reference_url argument,
+    # if present we will pass a file:// or absolute path to the worker
+    if reference_local_path:
+        # convert to absolute file path string so downstream can detect local file
+        args.reference = str(Path(reference_local_path).resolve())
+    print("Using reference (final):", args.reference, file=sys.stderr)
 
     if args.design:
         files = find_design_files(Path(args.design))

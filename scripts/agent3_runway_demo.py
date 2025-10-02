@@ -16,6 +16,8 @@ import traceback
 from pathlib import Path
 from dotenv import load_dotenv
 import requests
+import time
+from urllib.parse import urlparse, quote as urlquote
 
 # load .env.local from project root
 project_root = Path(__file__).resolve().parents[1]
@@ -71,6 +73,61 @@ Requirements for the video:
 - Lighting: soft studio key + subtle rim, neutral background, no logos or text.
 - Output: photorealistic MP4, duration ~6s.
 """
+
+
+def download_reference_to_local(
+    reference_url: str, out_dir: Path, max_retries: int = 3, timeout: int = 120
+):
+    """
+    If reference_url is HTTP(S) this will attempt to download it into out_dir and return the local Path string.
+    Otherwise returns None.
+    """
+    if not reference_url:
+        return None
+
+    parsed = urlparse(reference_url)
+    if parsed.scheme not in ("http", "https"):
+        return None
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    local_name = Path(parsed.path).name or f"ref_{int(time.time())}.png"
+    if not Path(local_name).suffix:
+        local_name = local_name + ".png"
+    local_path = out_dir / f"ref_{local_name}"
+
+    attempt = 0
+    while attempt < max_retries:
+        try:
+            headers = {"User-Agent": "agent3-runway/1.0"}
+            r = requests.get(
+                reference_url, headers=headers, stream=True, timeout=timeout
+            )
+            r.raise_for_status()
+            with open(local_path, "wb") as fh:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        fh.write(chunk)
+            if local_path.exists() and local_path.stat().st_size > 100:
+                print(
+                    f"[AUTO-REF] Downloaded reference to {local_path}", file=sys.stderr
+                )
+                return str(local_path)
+            else:
+                print(
+                    f"[AUTO-REF] Downloaded file too small: {local_path}",
+                    file=sys.stderr,
+                )
+        except Exception as ex:
+            attempt += 1
+            print(
+                f"[AUTO-REF] download attempt {attempt} failed: {ex}", file=sys.stderr
+            )
+            time.sleep(1 + attempt * 1.5)
+    print(
+        f"[AUTO-REF] Failed to download reference after {max_retries} attempts: {reference_url}",
+        file=sys.stderr,
+    )
+    return None
 
 
 def design_to_summary(d: dict) -> str:
@@ -162,11 +219,20 @@ def find_design_files(path: Path):
 def robust_submit_veo(prompt: str, reference_url: str = None):
     """
     Submit runway video request to Veo.
-    Modern SDK only supports prompt=..., not contents.
-    If reference_url is provided, prepend it into the prompt text.
+    If reference_url is a local file path, include the file path text in the prompt.
+    If an HTTP URL is given, include the URL.
     """
     if reference_url:
-        prompt = f"Reference image: {reference_url}\n\n{prompt}"
+        try:
+            if Path(reference_url).exists():
+                # Local file case
+                prompt = f"Reference image file: {reference_url}\n\n{prompt}"
+            else:
+                # URL case
+                prompt = f"Reference image: {reference_url}\n\n{prompt}"
+        except Exception:
+            # fallback: treat as URL if Path fails
+            prompt = f"Reference image: {reference_url}\n\n{prompt}"
 
     try:
         op = client.models.generate_videos(
@@ -174,14 +240,15 @@ def robust_submit_veo(prompt: str, reference_url: str = None):
             prompt=prompt,
         )
         print(
-            "Used client.models.generate_videos(model=..., prompt=...)", file=sys.stderr
+            "Used client.models.generate_videos(model=..., prompt=...)",
+            file=sys.stderr,
         )
         return op
     except Exception as e:
         print("client.models.generate_videos failed:", e, file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
 
-    # fallback: older style
+    # fallback: older style SDK
     if hasattr(client, "generate_videos"):
         return client.generate_videos(model=VEO_MODEL, prompt=prompt)
 
@@ -465,18 +532,30 @@ def main():
 
             expected = project_root / "renders" / f"{design_id}__flatlay.png"
             if expected.exists():
-                from urllib.parse import quote as urlquote
-
-                encoded = urlquote(f"renders/{expected.name}", safe="")
-                # Build reference using REFERENCE_BASE
-                args.reference = f"{REFERENCE_BASE}/api/assets?path={encoded}"
-                print(f"[AUTO-REF] Using reference {args.reference}", file=sys.stderr)
+                # prefer local file
+                args.reference = str(expected.resolve())
+                print(
+                    f"[AUTO-REF] Found local flatlay at {args.reference}",
+                    file=sys.stderr,
+                )
             else:
                 print(f"[AUTO-REF] No flatlay found at {expected}", file=sys.stderr)
         except Exception as e:
             print(f"[AUTO-REF] Failed auto-reference check: {e}", file=sys.stderr)
 
-    print("Using reference:", args.reference, file=sys.stderr)
+    # If caller passed a remote HTTP reference, try to download into out_dir/refs
+    if args.reference and args.reference.startswith(("http://", "https://")):
+        local_candidate = download_reference_to_local(
+            args.reference, Path(args.out_dir) / "refs", max_retries=3, timeout=120
+        )
+        if local_candidate:
+            args.reference = str(Path(local_candidate).resolve())
+            print(
+                f"[AUTO-REF] Using downloaded local reference {args.reference}",
+                file=sys.stderr,
+            )
+
+    print("Using reference (final):", args.reference, file=sys.stderr)
 
     if args.design:
         files = find_design_files(Path(args.design))
