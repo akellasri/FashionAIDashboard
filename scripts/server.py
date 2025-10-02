@@ -524,29 +524,123 @@ def runway():
     design = body.get("design")
     modelConfig = body.get("modelConfig") or {}
     reference = body.get("reference")
+
     if not design:
         return jsonify(success=False, error="missing design"), 400
 
-    # If a reference flatlay URL is provided, use the deterministic ffmpeg fallback
-    # to create a runway-video that matches the flatlay exactly.
-    if reference:
+    td = tempfile.mkdtemp()
+    try:
+        # write design json to temp file
+        design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
+        design_path.write_text(
+            json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+
+        # Download reference if it's a remote URL so downstream tools (ffmpeg, scripts) have a local file
+        downloaded_reference = None
         try:
-            out_file = _make_runway_from_flatlay(
-                reference, str(PROJECT_ROOT / "output")
+            if (
+                reference
+                and isinstance(reference, str)
+                and reference.lower().startswith("http")
+            ):
+                r = requests.get(reference, stream=True, timeout=60)
+                r.raise_for_status()
+                # pick extension from content-type or default to .png
+                ext = ".png"
+                ctype = (r.headers.get("Content-Type") or "").lower()
+                if "jpeg" in ctype or "jpg" in ctype:
+                    ext = ".jpg"
+                fd, tmp_path = tempfile.mkstemp(suffix=ext, prefix="ref_", dir=td)
+                os.close(fd)
+                with open(tmp_path, "wb") as fh:
+                    for chunk in r.iter_content(chunk_size=8192):
+                        if chunk:
+                            fh.write(chunk)
+                downloaded_reference = tmp_path
+        except requests.RequestException as e:
+            # log but continue; agent may accept URL or proceed without reference
+            print(
+                f"[runway] failed to download reference {reference}: {e}",
+                file=sys.stderr,
             )
-            public = _public_url_for_path(out_file, request)
-            return jsonify(
-                success=True,
-                videoUrl=public,
-                message="Runway video generated from flatlay (ffmpeg fallback)",
+            downloaded_reference = None
+
+        # build args for the agent script
+        args = [
+            PYTHON_EXE,
+            str(PROJECT_ROOT / "scripts" / "agent3_runway_demo.py"),
+            "--design",
+            str(design_path),
+            "--model-attrs",
+            json.dumps(modelConfig),
+            "--out-dir",
+            str(PROJECT_ROOT / "output"),
+        ]
+
+        if downloaded_reference:
+            args += ["--reference", str(downloaded_reference)]
+        elif reference:
+            # pass remote URL as fallback (agent may accept it)
+            args += ["--reference", reference]
+
+        # run the agent script (blocking)
+        code, out, err = _run_cmd(args)
+
+        # debug logging (appears in Azure logs)
+        print("[runway] agent exit code:", code, file=sys.stderr)
+        print("[runway] stdout (truncated):", (out or "")[:4000], file=sys.stderr)
+        print("[runway] stderr (truncated):", (err or "")[:4000], file=sys.stderr)
+
+        if code != 0:
+            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+        # locate produced runway video (or mp4) using same helper
+        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
+        if not saved:
+            # fallback: search output directory for runway mp4 pattern
+            for f in sorted(
+                Path(PROJECT_ROOT / "output").glob(
+                    f"{design.get('design_id','design')}*runway*.mp4"
+                ),
+                key=lambda p: p.stat().st_mtime,
+                reverse=True,
+            ):
+                saved = f
+                break
+
+        if not saved:
+            return (
+                jsonify(
+                    success=False,
+                    raw_stdout=out,
+                    raw_stderr=err,
+                    error="No runway artifact found",
+                ),
+                500,
             )
-        except Exception as e:
-            # If ffmpeg fallback fails, log and fall through to the original pipeline
-            # (so you still have a chance to use the heavy generator)
-            # Keep the error accessible for debugging
-            err_msg = str(e)
-            print("ffmpeg fallback error:", err_msg, file=sys.stderr)
-            # continue to original path below (optional)
+
+        public = _public_url_for_path(saved, request)
+        return jsonify(
+            success=True, videoUrl=public, message="Runway video generated successfully"
+        )
+
+    except Exception as e:
+        # catch-all - always return JSON on error
+        print("[runway] unexpected error:", str(e), file=sys.stderr)
+        return jsonify(success=False, error=str(e)), 500
+
+    finally:
+        # optionally cleanup downloaded_reference (leave output files intact)
+        try:
+            if (
+                "downloaded_reference" in locals()
+                and downloaded_reference
+                and os.path.exists(downloaded_reference)
+            ):
+                os.remove(downloaded_reference)
+        except Exception:
+            pass
 
 
 @app.route("/apply-change", methods=["POST"])
