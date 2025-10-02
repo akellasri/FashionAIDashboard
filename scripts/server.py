@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 from flask import Flask, request, jsonify, send_from_directory, abort
 from flask_cors import CORS
+import requests
 import uuid
 from datetime import datetime
 from shutil import which
@@ -420,21 +421,59 @@ def virtual_showcase():
     body = request.get_json() or {}
     design = body.get("design")
     modelConfig = body.get("modelConfig") or body.get("model_attrs") or {}
-    reference = body.get("reference")  # may be absolute URL
-    # new: allow explicit description
-    description = body.get("description") or (
-        design.get("design_text") if design else None
-    )
+    reference = body.get("reference")  # may be absolute URL or null
 
     if not design:
         return jsonify(success=False, error="missing design"), 400
 
+    # write design json to a temp file for the agent script
     td = tempfile.mkdtemp()
     design_path = Path(td) / f"{design.get('design_id','design')}.design.json"
     design_path.write_text(
         json.dumps(design, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
+    # If reference is a remote URL, download it to a temp file so the agent can access it
+    downloaded_reference = None
+    try:
+        if (
+            reference
+            and isinstance(reference, str)
+            and reference.lower().startswith("http")
+        ):
+            # download remote image (with timeout and streaming)
+            try:
+                r = requests.get(reference, stream=True, timeout=60)
+                r.raise_for_status()
+                # save to temp file
+                ext = ".png"
+                # try to detect extension from content-type
+                ctype = r.headers.get("Content-Type", "").lower()
+                if "jpeg" in ctype:
+                    ext = ".jpg"
+                fd, tmp_path = tempfile.mkstemp(suffix=ext, prefix="ref_", dir=td)
+                os.close(fd)
+                with open(tmp_path, "wb") as fh:
+                    for chunk in r.iter_content(chunk_size=8192):
+                        if chunk:
+                            fh.write(chunk)
+                downloaded_reference = tmp_path
+            except Exception as e:
+                # log and continue: we may still call the agent without a reference
+                print(
+                    f"[virtual_showcase] failed to download reference {reference}: {e}",
+                    file=sys.stderr,
+                )
+                downloaded_reference = None
+
+    except Exception as e:
+        print(
+            "[virtual_showcase] unexpected error while handling reference:",
+            e,
+            file=sys.stderr,
+        )
+
+    # Build agent args; pass --reference <path> only if downloaded_reference available
     args = [
         PYTHON_EXE,
         str(PROJECT_ROOT / "scripts" / "agent3_virtual_showcase_demo.py"),
@@ -445,58 +484,38 @@ def virtual_showcase():
         "--out-dir",
         str(PROJECT_ROOT / "output"),
     ]
+    if downloaded_reference:
+        args += ["--reference", str(downloaded_reference)]
+    elif reference:
+        # If reference was given but couldn't be downloaded, still include it (agent may accept URL)
+        args += ["--reference", reference]
 
-    # If reference is remote URL, download to a temp file and pass local path
-    tmp_ref_file = None
-    try:
-        if reference:
-            if reference.startswith("http://") or reference.startswith("https://"):
-                r = requests.get(reference, stream=True, timeout=60)
-                if r.status_code == 200:
-                    tmp_ref = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-                    with open(tmp_ref.name, "wb") as fh:
-                        shutil.copyfileobj(r.raw, fh)
-                    tmp_ref_file = tmp_ref.name
-                    args += ["--reference", tmp_ref_file]
-                else:
-                    # still pass the URL: some scripts accept URL directly
-                    args += ["--reference", reference]
-            else:
-                # local path already provided
-                args += ["--reference", str(reference)]
+    # run the agent script
+    code, out, err = _run_cmd(args)
+    # log for diagnostics
+    print("[virtual_showcase] agent exit code:", code, file=sys.stderr)
+    print("[virtual_showcase] stdout (truncated):", (out or "")[:3000], file=sys.stderr)
+    print("[virtual_showcase] stderr (truncated):", (err or "")[:3000], file=sys.stderr)
 
-        # pass description / design_text explicitly if present (helps fidelity)
-        if description:
-            args += ["--description", str(description)]
+    if code != 0:
+        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
 
-        code, out, err = _run_cmd(args)
-        if code != 0:
-            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-
-        saved = _find_saved_path(out, err, design_id=design.get("design_id"))
-        if not saved:
-            possible = Path(PROJECT_ROOT / "output").glob(
-                f"{design.get('design_id','design')}*showcase*.png"
-            )
-            for f in possible:
-                saved = f
-                break
-        if not saved:
-            return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
-
-        public = _public_url_for_path(saved, request)
-        return jsonify(
-            success=True,
-            imageUrl=public,
-            message="Virtual showcase generated successfully",
+    saved = _find_saved_path(out, err, design_id=design.get("design_id"))
+    if not saved:
+        # try output dir pattern
+        possible = Path(PROJECT_ROOT / "output").glob(
+            f"{design.get('design_id','design')}*showcase*.png"
         )
-    finally:
-        # cleanup temp reference file
-        try:
-            if tmp_ref_file:
-                os.unlink(tmp_ref_file)
-        except Exception:
-            pass
+        for f in possible:
+            saved = f
+            break
+    if not saved:
+        return jsonify(success=False, raw_stdout=out, raw_stderr=err), 500
+
+    public = _public_url_for_path(saved, request)
+    return jsonify(
+        success=True, imageUrl=public, message="Virtual showcase generated successfully"
+    )
 
 
 @app.route("/runway", methods=["POST"])
